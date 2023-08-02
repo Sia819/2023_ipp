@@ -343,11 +343,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SpawnFloor>k__BackingField: {fileID: 1855194053}
-  <SpawnHole>k__BackingField: {fileID: 0}
+  <SpawnHole>k__BackingField: {fileID: 34672116}
   <Player>k__BackingField: {fileID: 5992752100152169340}
-  <MobZomBear>k__BackingField: {fileID: 0}
-  <MobZomBunny>k__BackingField: {fileID: 0}
-  <MobHellephant>k__BackingField: {fileID: 0}
+  <MobZomBear>k__BackingField: {fileID: 6860502636825390567, guid: 76245382d637d7e44870bf322fe8bdde, type: 3}
+  <MobZomBunny>k__BackingField: {fileID: 8703570615550452755, guid: ae16f31b4c89cf2489a4e116ade46c42, type: 3}
+  <MobHellephant>k__BackingField: {fileID: 3409546843763509366, guid: 6a83c7de03492c340b3f6c0bb90f8411, type: 3}
 --- !u!1001 &347732631
 PrefabInstance:
   m_ObjectHideFlags: 0
