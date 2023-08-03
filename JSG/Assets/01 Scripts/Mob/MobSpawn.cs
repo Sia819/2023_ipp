@@ -67,11 +67,13 @@ public class MobSpawn : MonoBehaviour
             // 로컬 공간에서의 점을 월드 공간으로 변환합니다.
             spawnPoint = spawnArea.transform.TransformPoint(localPoint);
         }
-        while (!IsPointInExpertArea(spawnPoint, spawnArea) && (!considerCamera || IsPointInCameraView(spawnPoint)));
+        while (IsPointInExpertArea(spawnPoint, spawnArea) && IsPointInCameraView(spawnPoint, considerCamera));
 
         return spawnPoint;
     }
 
+    /// <summary> 해당 위치에 스폰 가능한지 장애물 여부를 체크합니다. </summary>
+    /// <returns> true = 스폰 가능한 영역입니다. false = 스폰 불가능한 영역입니다. </returns>
     bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea)
     {
         // point 위치에서 아래로 레이를 발사합니다.
@@ -91,11 +93,13 @@ public class MobSpawn : MonoBehaviour
         return false; // 그 외의 경우에는 false를 반환합니다.
     }
 
-    /// <summary>
-    /// 해당 지점이 카메라 내에 있으면 true를 반환합니다.
-    /// </summary>
-    bool IsPointInCameraView(Vector3 point)
+    /// <summary> 해당 위치가 카메라에 보여지는 여부를 체크합니다. </summary>
+    /// <returns> true = 위치는 카메라에 보여집니다. false = 위치는 카메라에 보여지지 않습니다. </returns>
+    bool IsPointInCameraView(Vector3 point, bool considerCamera)
     {
+        if (considerCamera == false)
+            return false;
+
         Vector3 viewportPoint = Camera.main.WorldToViewportPoint(point);
         return viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1;
     }
