@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [field: SerializeField] public float Speed { get; set; } = 5f;
+    [SerializeField] private float speed = 5f;
 
     private Rigidbody rb;
     private Animator anim;
@@ -62,6 +62,6 @@ public class PlayerMovement : MonoBehaviour
         movement = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY);
         
         // Rigidbody를 통한 물리 움직임
-        rb.MovePosition(transform.position + (movement * Speed * Time.deltaTime));
+        rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
     }
 }

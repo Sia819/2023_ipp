@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    
+    public GameObject player;
 
-    public bool IsPlaying = false;
+    [HideInInspector] public bool isPlaying = false;
 
     void Awake()
     {
@@ -15,6 +17,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        IsPlaying = true;
+        isPlaying = true;
     }
 }

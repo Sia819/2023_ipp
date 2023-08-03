@@ -5,12 +5,14 @@ using static UnityEditor.PlayerSettings;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [field: SerializeField] public Transform GunStart { get; set; }
-    [field: SerializeField] public Transform GunEnd { get; set; }
+    [SerializeField] private Transform gunStart;
+    [SerializeField] private Transform gunEnd;
     
     private LineRenderer lineRenderer;
     private bool isFiring;
     private Coroutine fireLaserCoroutine;
+    private WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
+    private WaitForSeconds fireRateDuration = new WaitForSeconds(0.1f);
 
     void Awake()
     {
@@ -24,8 +26,8 @@ public class PlayerAttack : MonoBehaviour
         if (lineRenderer.enabled)
         {
             // 총구의 시작과 끝을 기준으로 방향 값만 가져와 ray를 생성
-            Vector3 direction = (GunEnd.position - GunStart.position).normalized;
-            Ray ray = new Ray(GunEnd.position, direction);
+            Vector3 direction = (gunEnd.position - gunStart.position).normalized;
+            Ray ray = new Ray(gunEnd.position, direction);
 
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f))
@@ -72,13 +74,13 @@ public class PlayerAttack : MonoBehaviour
             lineRenderer.enabled = true;
 
             // 0.2초 기다림
-            yield return new WaitForSeconds(0.05f);
+            yield return firingDuration;
 
             // 레이저 숨기기
             lineRenderer.enabled = false;
 
             // 0.2초 기다림
-            yield return new WaitForSeconds(0.1f);
+            yield return fireRateDuration;
         }
     }
 }
