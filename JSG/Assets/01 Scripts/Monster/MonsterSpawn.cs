@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MobSpawn : MonoBehaviour
+public class MonsterSpawn : MonoBehaviour
 {
     [SerializeField] private BoxCollider spawnFloor;
     [SerializeField] private BoxCollider spawnHole;
@@ -34,16 +34,16 @@ public class MobSpawn : MonoBehaviour
             {
                 spawnPoint = GenRandomPoint(spawnHole);
 
-                if (spawnType < 4) Instantiate(mobZomBear, spawnPoint, Quaternion.identity);
-                else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity);
+                if (spawnType < 4) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
             else // ¹Ù´Ú¿¡¼­ ¸÷ »ý¼º
             {
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
-                if (spawnType == 19) Instantiate(mobHellephant, spawnPoint, Quaternion.identity);
-                if (spawnType > 14) Instantiate(mobZomBear, spawnPoint, Quaternion.identity);
-                else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity);
+                if (spawnType == 19) Instantiate(mobHellephant, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                if (spawnType > 14) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
 
             yield return spawnTime;

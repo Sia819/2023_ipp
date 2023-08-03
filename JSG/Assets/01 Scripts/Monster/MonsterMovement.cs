@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MobMove : MonoBehaviour
+public class MonsterMovement : MonoBehaviour
 {
     private Transform player; // 플레이어의 Transform
     private float updateRate = 1f; // 경로 업데이트 빈도 (초 단위)
     private NavMeshAgent agent; // NavMesh Agent 컴포넌트
     private float timer; // 경로 업데이트 타이머
-
 
     void Start()
     {
