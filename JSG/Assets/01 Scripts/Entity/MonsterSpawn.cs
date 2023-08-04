@@ -23,6 +23,8 @@ public class MonsterSpawn : MonoBehaviour
         }
     }
 
+    /// <summary> 몬스터를 생성합니다. </summary>
+    /// <returns></returns>
     IEnumerator Spawn()
     {
         while (GameManager.Instance.isPlaying)
@@ -30,14 +32,14 @@ public class MonsterSpawn : MonoBehaviour
             Vector3 spawnPoint;
             int spawnType = Random.Range(0, 20);    // 랜덤 값으로 어디에 어떤 몬스터가 스폰될 지 결정됩니다.
 
-            if (spawnType < 6) // 쥐구멍에서 몹 생성
+            if (spawnType < 6) // 쥐구멍에서 몬스터 생성
             {
                 spawnPoint = GenRandomPoint(spawnHole);
 
                 if (spawnType < 4) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
-            else // 바닥에서 몹 생성
+            else // 바닥에서 몬스터 생성
             {
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
@@ -50,9 +52,8 @@ public class MonsterSpawn : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 몹을 스폰할 지점을 생성합니다.
-    /// </summary>
+    /// <summary> 몬스터를 스폰할 지점을 생성합니다. </summary>
+    /// <returns> 스폰가능한 영역의 좌표를 리턴합니다. </returns>
     Vector3 GenRandomPoint(BoxCollider spawnArea, bool considerCamera = false)
     {
         Vector3 spawnPoint;

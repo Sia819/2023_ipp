@@ -750,6 +750,8 @@ GameObject:
   - component: {fileID: 152817739081465}
   - component: {fileID: 7174744779402112430}
   - component: {fileID: 5151176552964015679}
+  - component: {fileID: 968221830627749984}
+  - component: {fileID: -496374074332511862}
   m_Layer: 0
   m_Name: ZomBunny
   m_TagString: Untagged
@@ -848,6 +850,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68039172f01009c449a589221e5906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &968221830627749984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c3d4a462b77549a63cd3509d06df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  damage: 20
+--- !u!114 &-496374074332511862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5563388873546722797

@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
+[RequireComponent(typeof(Player))]
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform gunStart;
     [SerializeField] private Transform gunEnd;
-    
+
+    private Player player;
     private LineRenderer lineRenderer;
     private bool isFiring;
+    private bool isFiringCanAttackable;     // 레이저 발생 시점 한번 만 공격하여, 업데이트 문에서 지속적 데미지를 입히는 문제를 방지
     private Coroutine fireLaserCoroutine;
-    private WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
-    private WaitForSeconds fireRateDuration = new WaitForSeconds(0.1f);
+    private readonly WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
+    private readonly WaitForSeconds fireRateDuration = new WaitForSeconds(0.1f);
 
     void Awake()
     {
+        player = GetComponent<Player>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
     }
@@ -35,6 +39,12 @@ public class PlayerAttack : MonoBehaviour
                 // 광선을 그리도록 라인 렌더러 설정
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, hit.point); // 충돌 위치
+
+                if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
+                {
+                    monster.CurrentHp -= player.damage;
+                    isFiringCanAttackable = false;      // 중복공격 방지
+                }
             }
             else
             {
@@ -70,17 +80,13 @@ public class PlayerAttack : MonoBehaviour
     {
         while (isFiring)
         {
-            // 레이저 보이기
+            // 레이저 보이고, 숨깁니다.
             lineRenderer.enabled = true;
-
-            // 0.2초 기다림
             yield return firingDuration;
-
-            // 레이저 숨기기
             lineRenderer.enabled = false;
-
-            // 0.2초 기다림
             yield return fireRateDuration;
+
+            isFiringCanAttackable = true; // 중복공격 방지
         }
     }
 }

@@ -1007,6 +1007,8 @@ GameObject:
   - component: {fileID: 7822907141969764982}
   - component: {fileID: 5803316476356741992}
   - component: {fileID: 8653090189717578889}
+  - component: {fileID: 320240605703433222}
+  - component: {fileID: 3652855360740237671}
   m_Layer: 0
   m_Name: ZomBear
   m_TagString: Untagged
@@ -1132,6 +1134,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68039172f01009c449a589221e5906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &320240605703433222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216155760554707785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c3d4a462b77549a63cd3509d06df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  damage: 20
+--- !u!114 &3652855360740237671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216155760554707785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7245864667150086846

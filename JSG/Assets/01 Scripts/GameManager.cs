@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
     
-    public GameObject player;
+    [field: SerializeField] public Player Player { get; private set; }
 
     [HideInInspector] public bool isPlaying = false;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.LogWarning("GameManager가 하나 이상 존재합니다!");
+        }
     }
 
     void Start()

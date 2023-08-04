@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: 3894091331963314921}
   - component: {fileID: 5943400011694966030}
   - component: {fileID: 27630478724125704}
+  - component: {fileID: 9136619606138040697}
+  - component: {fileID: -1012032115230873702}
   m_Layer: 0
   m_Name: Hellephant
   m_TagString: Untagged
@@ -300,6 +302,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68039172f01009c449a589221e5906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9136619606138040697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879284815741700903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c3d4a462b77549a63cd3509d06df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  damage: 20
+--- !u!114 &-1012032115230873702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879284815741700903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1750026207101815700
