@@ -35,22 +35,17 @@ public class PlayerAttack : MonoBehaviour
             Vector3 direction = (gunEnd.position - gunStart.position).normalized;
             Ray ray = new Ray(gunEnd.position, direction);
             RaycastHit hit;
-            
+
             if (Physics.Raycast(ray, out hit, 100f))
             {// 충돌한 영역까지만 광선을 그리도록 라인 렌더러 설정
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, hit.point); // 충돌 위치
-                
-                if (isFiringCanAttackable)
-                {
-                    Instantiate(gunParticle.gameObject, player.gunFlareTransform)?.transform.SetParent(this.transform);
 
-                    if (hit.collider.TryGetComponent<Monster>(out Monster monster))
-                    {
-                        monster.CurrentHp -= player.damage;
-                        isFiringCanAttackable = false;      // 중복 공격 방지
-                        Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
-                    }
+                if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
+                {
+                    monster.CurrentHp -= player.damage;
+                    isFiringCanAttackable = false;      // 중복 공격 방지
+                    Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
                 }
             }
             else
@@ -73,11 +68,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            isFiring = false;
-            if (fireLaserCoroutine != null)
-            {
-                StopCoroutine(fireLaserCoroutine);
-            }
+            isFiring = false; // 코루틴의 반복을 중단합니다
             lineRenderer.enabled = false; // 레이저 숨기기
         }
     }
@@ -86,10 +77,15 @@ public class PlayerAttack : MonoBehaviour
     {
         while (isFiring)
         {
-            // 레이저 보이고, 숨깁니다.
+            // 레이저와 불빛을 표시합니다.
             lineRenderer.enabled = true;
+            player.gunLight.SetActive(true);
+            Instantiate(gunParticle.gameObject, player.gunFlareTransform)?.transform.SetParent(this.transform);
             yield return firingDuration;
+
+            // 레이저를 감춥니다.
             lineRenderer.enabled = false;
+            player.gunLight.SetActive(false);
             yield return fireRateDuration;
 
             isFiringCanAttackable = true; // 중복공격 방지

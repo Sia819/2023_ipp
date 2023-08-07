@@ -15,7 +15,7 @@ public class EntityAnimationController : MonoBehaviour
         animator = GetComponent<Animator>();
         entity = GetComponent<Entity>();
         entity.OnMoveStateChanged += MovingAnimation;
-        entity.OnHpChanged += DeathAnimation;
+        entity.OnDeath += DeathAnimation;
     }
 
     private void MovingAnimation(bool moving)
@@ -26,9 +26,8 @@ public class EntityAnimationController : MonoBehaviour
             animator.SetTrigger("Stop");
     }
 
-    private void DeathAnimation(float currentHealth)
+    private void DeathAnimation()
     {
-        if (currentHealth <= 0)
-            animator.SetTrigger("Death");
+        animator.SetTrigger("Death");
     }
 }

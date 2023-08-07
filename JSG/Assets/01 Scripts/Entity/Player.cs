@@ -7,8 +7,10 @@ public class Player : Entity
     public Transform gunFlareTransform;
     public GameObject gunLight;
 
-    internal override void Death()
+    void Start()
     {
-        throw new System.NotImplementedException();
+        
     }
+
+
 }

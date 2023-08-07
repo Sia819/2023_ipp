@@ -749,10 +749,12 @@ GameObject:
   - component: {fileID: 1110678237124677414}
   - component: {fileID: -6441621243874147512}
   - component: {fileID: 152817739081465}
+  - component: {fileID: 1246348564661104859}
   - component: {fileID: 7174744779402112430}
-  - component: {fileID: 5151176552964015679}
   - component: {fileID: 968221830627749984}
+  - component: {fileID: 5151176552964015679}
   - component: {fileID: -496374074332511862}
+  - component: {fileID: 429110859110740546}
   m_Layer: 0
   m_Name: ZomBunny
   m_TagString: Untagged
@@ -846,6 +848,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 1.7, z: 0.75}
   m_Center: {x: 0, y: 0.85, z: 0.1}
+--- !u!65 &1246348564661104859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 1.7, z: 0.75}
+  m_Center: {x: 0, y: 0.85, z: 0.22}
 --- !u!195 &7174744779402112430
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -868,18 +891,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5151176552964015679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5482782861598802160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68039172f01009c449a589221e5906bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &968221830627749984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,7 +904,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  damage: 20
+  damage: 10
+--- !u!114 &5151176552964015679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68039172f01009c449a589221e5906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-496374074332511862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +929,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &429110859110740546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b226e1c6b2104984ebde179989987c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCollider: {fileID: 1246348564661104859}
 --- !u!1 &5563388873546722797
 GameObject:
   m_ObjectHideFlags: 0

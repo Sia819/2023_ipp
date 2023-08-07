@@ -6,11 +6,13 @@ public abstract class Entity : MonoBehaviour
 {
     public delegate void MoveStateChangedHandler(bool moving);
     public delegate void HpChangedHandler(float currentHp);
+    public delegate void DeathHandler();
 
     /// <summary> Entity의 이동 상태 변경 시 이벤트 </summary>
     public event MoveStateChangedHandler OnMoveStateChanged;
     /// <summary> Entity의 체력 변경 시 이벤트 </summary>
     public event HpChangedHandler OnHpChanged;
+    public event DeathHandler OnDeath;
 
     public float maxHp = 100f;
     public float damage = 20f;
@@ -36,7 +38,7 @@ public abstract class Entity : MonoBehaviour
             else
             {
                 this.currentHp = 0f;
-                Death();
+                OnDeath?.Invoke();
             }    
 
             OnHpChanged?.Invoke(value);
@@ -61,6 +63,4 @@ public abstract class Entity : MonoBehaviour
     {
         currentHp = maxHp;
     }
-
-    internal abstract void Death();
 }

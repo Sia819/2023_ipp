@@ -1732,7 +1732,7 @@ GameObject:
   - component: {fileID: 1535167476455549430}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1945,6 +1945,7 @@ MonoBehaviour:
   maxHp: 100
   damage: 20
   gunFlareTransform: {fileID: 0}
+  gunLight: {fileID: 0}
 --- !u!114 &1858317041368761341
 MonoBehaviour:
   m_ObjectHideFlags: 0

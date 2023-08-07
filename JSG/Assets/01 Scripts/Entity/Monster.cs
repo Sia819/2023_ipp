@@ -8,29 +8,27 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Monster : Entity
 {
-    Collider collider;
+    private Collider boundCollider;
     private Rigidbody rb;
     private NavMeshAgent agent;
+    private WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
     private void Start()
     {
-        collider = GetComponent<Collider>();
+        boundCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-    }
 
-    internal override void Death()
-    {
-        StartCoroutine(deathAction());
+        OnDeath += () => StartCoroutine(deathAction());
     }
-
     IEnumerator deathAction()
     {
-        yield return new WaitForSeconds(0.7f);
-        collider.enabled = false;
+        yield return deathWaitTime;
+        boundCollider.enabled = false;
         agent.enabled = false;
-        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        yield return new WaitForSeconds(0.7f);
+        rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // rigidbody의 Y축 고정을 풉니다.
+
+        yield return deathWaitTime;
         Destroy(this.gameObject);
     }
 }
