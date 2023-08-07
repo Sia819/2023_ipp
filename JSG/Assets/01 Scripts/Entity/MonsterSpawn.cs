@@ -12,7 +12,9 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] private GameObject mobZomBunny;
     [SerializeField] private GameObject mobHellephant;
     
-    private WaitForSeconds spawnTime = new WaitForSeconds(5f);
+    private WaitForSeconds spawnTime = new WaitForSeconds(1f);
+    private int spawnMax = 50;
+    private int spawnCount = 0;
 
     // 첫 번째 프레임 업데이트 전에 시작이 호출됩니다.
     void Start()

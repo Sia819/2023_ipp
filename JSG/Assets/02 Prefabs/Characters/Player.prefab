@@ -1725,11 +1725,11 @@ GameObject:
   - component: {fileID: 6258868869183776527}
   - component: {fileID: 3467784524159951198}
   - component: {fileID: 6029993955607007510}
-  - component: {fileID: 511301869345000123}
-  - component: {fileID: 1535167476455549430}
   - component: {fileID: 806501442687091974}
   - component: {fileID: 7777794706844955557}
   - component: {fileID: 1858317041368761341}
+  - component: {fileID: 511301869345000123}
+  - component: {fileID: 1535167476455549430}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1826,33 +1826,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0.33, y: 0.5, z: 0.05}
---- !u!114 &511301869345000123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762744929058676194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6504e9c46e8b04ba1ccedb552b262c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
---- !u!114 &1535167476455549430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762744929058676194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3d0a9ad8cdfefe4897294f8747446bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunStart: {fileID: 6376438275264726176}
-  gunEnd: {fileID: 2478348227804668513}
 --- !u!120 &806501442687091974
 LineRenderer:
   serializedVersion: 2
@@ -1971,6 +1944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   damage: 20
+  gunFlareTransform: {fileID: 0}
 --- !u!114 &1858317041368761341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,6 +1957,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &511301869345000123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762744929058676194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6504e9c46e8b04ba1ccedb552b262c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!114 &1535167476455549430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762744929058676194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d0a9ad8cdfefe4897294f8747446bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunStart: {fileID: 6376438275264726176}
+  gunEnd: {fileID: 2478348227804668513}
+  gunParticle: {fileID: 19800000, guid: 0bd11145ced4539458f937fc4609544a, type: 3}
+  hitParticle: {fileID: 0}
 --- !u!1 &6834319293565469626
 GameObject:
   m_ObjectHideFlags: 0

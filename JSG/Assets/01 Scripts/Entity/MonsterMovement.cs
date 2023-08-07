@@ -18,7 +18,7 @@ public class MonsterMovement : MonoBehaviour
         monster = GetComponent<Monster>();
         navAgent = GetComponent<NavMeshAgent>(); // Nav Mesh Agent 컴포넌트 가져오기
         // TODO : 나중에 우선순위 다시 확인하기
-        navAgent.avoidancePriority = 50; // 회피 우선순위 설정
+        //navAgent.avoidancePriority = 10; // 회피 우선순위 설정
         navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // 장애물 회피 품질 설정
         player = GameManager.Instance.Player;
     }

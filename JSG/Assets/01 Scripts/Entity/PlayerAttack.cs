@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform gunStart;
     [SerializeField] private Transform gunEnd;
+    [SerializeField] private ParticleSystem gunParticle;
+    [SerializeField] private ParticleSystem hitParticle;
 
     private Player player;
     private LineRenderer lineRenderer;
@@ -32,23 +34,27 @@ public class PlayerAttack : MonoBehaviour
             // 총구의 시작과 끝을 기준으로 방향 값만 가져와 ray를 생성
             Vector3 direction = (gunEnd.position - gunStart.position).normalized;
             Ray ray = new Ray(gunEnd.position, direction);
-
             RaycastHit hit;
+            
             if (Physics.Raycast(ray, out hit, 100f))
-            {
-                // 광선을 그리도록 라인 렌더러 설정
+            {// 충돌한 영역까지만 광선을 그리도록 라인 렌더러 설정
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, hit.point); // 충돌 위치
-
-                if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
+                
+                if (isFiringCanAttackable)
                 {
-                    monster.CurrentHp -= player.damage;
-                    isFiringCanAttackable = false;      // 중복공격 방지
+                    Instantiate(gunParticle.gameObject, player.gunFlareTransform)?.transform.SetParent(this.transform);
+
+                    if (hit.collider.TryGetComponent<Monster>(out Monster monster))
+                    {
+                        monster.CurrentHp -= player.damage;
+                        isFiringCanAttackable = false;      // 중복 공격 방지
+                        Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
+                    }
                 }
             }
             else
-            {
-                // 충돌하지 않았으므로 최대 거리로 설정
+            {// 충돌하지 않았으므로 최대 거리로 설정
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, ray.origin + ray.direction * 100);
             }
