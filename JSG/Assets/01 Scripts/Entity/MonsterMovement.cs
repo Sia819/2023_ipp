@@ -8,10 +8,10 @@ using UnityEngine.AI;
 public class MonsterMovement : MonoBehaviour
 {
     private Monster monster;
-    private Player player;          // 플레이어의 Transform
-    private NavMeshAgent navAgent;     // NavMesh Agent 컴포넌트
-    private float updateRate = 1f;  // 경로 업데이트 빈도 (초 단위)
-    private float timer;            // 경로 업데이트 타이머
+    private Player player;              // 플레이어의 Transform
+    private NavMeshAgent navAgent;      // NavMesh Agent 컴포넌트
+    private float updateRate = 1f;      // 경로 업데이트 빈도 (초 단위)
+    private float timer;                // 경로 업데이트 타이머
 
     void Start()
     {

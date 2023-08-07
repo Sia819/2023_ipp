@@ -21,16 +21,25 @@ public abstract class Entity : MonoBehaviour
     /// <summary> Entity가 현재 살아있는지의 여부입니다. </summary>
     public bool IsAlive => currentHp > 0f;
 
+    /// <summary> 현재 Entity의 체력입니다. </summary>
     public float CurrentHp
     {
         get => this.currentHp;
         set
         {
-            if (this.currentHp != value)
-            {
+            // 같은 값을 대입하려고 하거나, 체력을 0보다 적게 설정할 수 없습니다.
+            if (this.currentHp == value) return;            
+            if (value < 0 && this.currentHp == 0) return;   
+            
+            if (value > 0)
                 this.currentHp = value;
-                OnHpChanged?.Invoke(value);
-            }
+            else
+            {
+                this.currentHp = 0f;
+                Death();
+            }    
+
+            OnHpChanged?.Invoke(value);
         }
     }
 
@@ -39,7 +48,7 @@ public abstract class Entity : MonoBehaviour
     {
         get => this.isMoving;
         set
-        {  
+        {
             if (this.isMoving != value)
             {
                 this.isMoving = value;
@@ -51,12 +60,6 @@ public abstract class Entity : MonoBehaviour
     void Awake()
     {
         currentHp = maxHp;
-    }
-
-    private void Update()
-    {
-        if (currentHp <= 0f)
-            Death();
     }
 
     internal abstract void Death();

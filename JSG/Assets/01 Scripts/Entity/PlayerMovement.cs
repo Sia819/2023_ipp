@@ -26,12 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
         // 카메라에서 마우스 커서로 ray cast 생성
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
 
+        //Physics.Raycast(ray, out RaycastHit hit, 100f)
         // ray cast 수행 시 100미터 안에서 무언가가 부딪히면
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        foreach (RaycastHit hit in hits)
         {
-            // ray floor hit point를 향하도록 Player를 회전
-            transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            if (hit.collider.CompareTag("Floor"))
+            {
+                // ray floor hit point를 향하도록 Player를 회전
+                transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            }
         }
     }
 
