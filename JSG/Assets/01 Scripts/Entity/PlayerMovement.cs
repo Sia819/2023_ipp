@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (player.IsAlive == false) return;
+
         /////////////// Look at mouse ///////////////
 
         // 카메라에서 마우스 커서로 ray cast 생성
@@ -42,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.IsAlive == false) return;
+
         /////////////// Player movement ///////////////
 
         float moveHorizontal = Input.GetAxis("Horizontal");

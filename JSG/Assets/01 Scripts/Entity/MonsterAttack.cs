@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MonsterAttack : MonoBehaviour
 {
-    public Collider attackCollider;
+    [field: SerializeField] public Collider AttackCollider { get; private set; }
 
     private Monster monster;
 

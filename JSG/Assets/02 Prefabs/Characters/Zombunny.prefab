@@ -941,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b226e1c6b2104984ebde179989987c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCollider: {fileID: 1246348564661104859}
+  <AttackCollider>k__BackingField: {fileID: 1246348564661104859}
 --- !u!1 &5563388873546722797
 GameObject:
   m_ObjectHideFlags: 0

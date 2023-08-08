@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     public delegate void MoveStateChangedHandler(bool moving);
-    public delegate void HpChangedHandler(float currentHp);
+    public delegate void HpChangedHandler(float currentHp, float maxHp);
     public delegate void DeathHandler();
 
     /// <summary> Entity의 이동 상태 변경 시 이벤트 </summary>
@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
                 OnDeath?.Invoke();
             }    
 
-            OnHpChanged?.Invoke(value);
+            OnHpChanged?.Invoke(this.currentHp, maxHp);
         }
     }
 

@@ -26,7 +26,6 @@ public class MonsterSpawn : MonoBehaviour
     }
 
     /// <summary> 몬스터를 생성합니다. </summary>
-    /// <returns></returns>
     IEnumerator Spawn()
     {
         while (GameManager.Instance.isPlaying)

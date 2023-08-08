@@ -21,13 +21,14 @@ public class EntityAnimationController : MonoBehaviour
     private void MovingAnimation(bool moving)
     {
         if (moving)
-            animator.SetTrigger("Move");
+            animator.SetTrigger("MoveTrg");
         else
-            animator.SetTrigger("Stop");
+            animator.SetTrigger("StopTrg");
     }
 
     private void DeathAnimation()
     {
-        animator.SetTrigger("Death");
+        animator.SetTrigger("DeathTrg");
+        animator.SetBool("Death", true);
     }
 }

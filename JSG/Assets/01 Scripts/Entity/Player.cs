@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public Transform gunFlareTransform;
-    public GameObject gunLight;
-
-    void Start()
-    {
-        
-    }
-
-
+    [field: SerializeField] public Transform GunFlareTransform { get; private set; }
+    [field: SerializeField] public GameObject GunLight { get; private set; }
 }

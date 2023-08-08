@@ -11,7 +11,7 @@ public class Monster : Entity
     private Collider boundCollider;
     private Rigidbody rb;
     private NavMeshAgent agent;
-    private WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
+    private readonly WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
     private void Start()
     {
