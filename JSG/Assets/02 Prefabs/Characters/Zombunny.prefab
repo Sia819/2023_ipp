@@ -905,6 +905,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   damage: 10
+  boundCollider: {fileID: 152817739081465}
+  attackCollider: {fileID: 1246348564661104859}
+  ScorePoint: 100
 --- !u!114 &5151176552964015679
 MonoBehaviour:
   m_ObjectHideFlags: 0

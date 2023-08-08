@@ -8,6 +8,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Monster : Entity
 {
+    [SerializeField] private int ScorePoint = 100;
+
     private Collider boundCollider;
     private Rigidbody rb;
     private NavMeshAgent agent;
@@ -19,8 +21,15 @@ public class Monster : Entity
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 
+        OnDeath += ScorePointAdd;
         OnDeath += () => StartCoroutine(deathAction());
     }
+
+    void ScorePointAdd()
+    {
+        GameManager.Instance.GameScore += ScorePoint;
+    }
+
     IEnumerator deathAction()
     {
         yield return deathWaitTime;
