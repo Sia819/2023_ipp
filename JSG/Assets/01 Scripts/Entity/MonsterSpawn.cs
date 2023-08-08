@@ -11,12 +11,12 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] private GameObject mobZomBear;
     [SerializeField] private GameObject mobZomBunny;
     [SerializeField] private GameObject mobHellephant;
-    
+    [SerializeField] private int spawnMax = 50;
+
     private WaitForSeconds spawnTime = new WaitForSeconds(1f);
-    private int spawnMax = 50;
+    
     private int spawnCount = 0;
 
-    // 첫 번째 프레임 업데이트 전에 시작이 호출됩니다.
     void Start()
     {
         if (GameManager.Instance.isPlaying)
@@ -30,6 +30,12 @@ public class MonsterSpawn : MonoBehaviour
     {
         while (GameManager.Instance.isPlaying)
         {
+            if (spawnMax <= spawnCount)
+            {
+                yield return spawnTime;
+                continue;
+            }
+
             Vector3 spawnPoint;
             int spawnType = Random.Range(0, 20);    // 랜덤 값으로 어디에 어떤 몬스터가 스폰될 지 결정됩니다.
 
@@ -45,10 +51,10 @@ public class MonsterSpawn : MonoBehaviour
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
                 if (spawnType == 19) Instantiate(mobHellephant, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
-                if (spawnType > 14) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                else if (spawnType > 14) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
-
+            spawnCount++;
             yield return spawnTime;
         }
     }
