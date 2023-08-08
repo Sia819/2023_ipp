@@ -59,6 +59,6 @@ public class PlayerMovement : MonoBehaviour
 
         // 물리 움직임 구현
         Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // Y축 보정값 
-        rb.MovePosition(transform.position + (destination * speed * Time.deltaTime));
+        rb.MovePosition(transform.position + (destination * speed * Time.fixedDeltaTime));
     }
 }
