@@ -16,6 +16,14 @@ public class EntityAnimationController : MonoBehaviour
         entity = GetComponent<Entity>();
         entity.OnMoveStateChanged += MovingAnimation;
         entity.OnDeath += DeathAnimation;
+        GameManager.Instance.OnGameResetted += OnResetted; 
+    }
+
+    private void OnDestroy()
+    {
+        entity.OnMoveStateChanged -= MovingAnimation;
+        entity.OnDeath -= DeathAnimation;
+        GameManager.Instance.OnGameResetted -= OnResetted;
     }
 
     private void MovingAnimation(bool moving)
@@ -30,5 +38,11 @@ public class EntityAnimationController : MonoBehaviour
     {
         animator.SetTrigger("DeathTrg");
         animator.SetBool("Death", true);
+    }
+
+    private void OnResetted()
+    {
+        animator?.SetBool("Death", false);
+        animator?.SetTrigger("StopTrg");
     }
 }

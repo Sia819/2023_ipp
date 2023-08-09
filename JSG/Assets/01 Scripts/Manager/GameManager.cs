@@ -7,10 +7,14 @@ public class GameManager : Singleton<GameManager>
     public delegate void GameScoreChanged(int score);
     public event GameScoreChanged OnGameScoreChanged;
 
+    public delegate void GameResetted();
+    public event GameResetted OnGameResetted;
+
     [field: SerializeField] public Player Player { get; private set; }
 
-    [HideInInspector] public bool isPlaying = false;
+    public bool IsPlaying { get; set; }
 
+    public int MonsterCount { get; set; }
 
     public int GameScore
     {
@@ -26,6 +30,13 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        isPlaying = true;
+        IsPlaying = true;
+    }
+
+    public void GameReset()
+    {
+        IsPlaying = true;
+        GameScore = 0;
+        OnGameResetted?.Invoke();
     }
 }

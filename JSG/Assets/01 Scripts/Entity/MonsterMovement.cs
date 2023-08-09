@@ -10,8 +10,7 @@ public class MonsterMovement : MonoBehaviour
     private Monster monster;
     private Player player;              // 플레이어의 Transform
     private NavMeshAgent navAgent;      // NavMesh Agent 컴포넌트
-    private float updateRate = 1f;      // 경로 업데이트 빈도 (초 단위)
-    private float timer;                // 경로 업데이트 타이머
+    private readonly WaitForSeconds pathUpdateRate = new WaitForSeconds(1f);      // 경로 업데이트 빈도 (초 단위)
 
     void Start()
     {
@@ -19,18 +18,16 @@ public class MonsterMovement : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>(); // Nav Mesh Agent 컴포넌트 가져오기
         navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // 장애물 회피 품질 설정
         player = GameManager.Instance.Player;
+        StartCoroutine(Move());
     }
 
-    void Update()
+    private IEnumerator Move()
     {
-        if (monster.IsAlive)
+        while (GameManager.Instance.IsPlaying && monster.IsAlive)
         {
-            timer += Time.deltaTime;
-            if (timer > updateRate) // 지정된 업데이트 빈도에 도달하면
-            {
-                navAgent.SetDestination(player.transform.position); // 플레이어 위치로 목적지 설정
-                timer = 0f;
-            }
+            navAgent.SetDestination(player.transform.position); // 플레이어 위치로 목적지 설정
+            yield return pathUpdateRate;
         }
+        this.navAgent.isStopped = true;
     }
 }

@@ -21,8 +21,13 @@ public class Monster : Entity
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 
-        OnDeath += ScorePointAdd;
-        OnDeath += () => StartCoroutine(deathAction());
+        this.OnDeath += ScorePointAdd;
+        this.OnDeath += () => StartCoroutine(deathAction());
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.MonsterCount = 0;
     }
 
     void ScorePointAdd()
@@ -34,7 +39,6 @@ public class Monster : Entity
     {
         yield return deathWaitTime;
         boundCollider.enabled = false;
-        agent.enabled = false;
         rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // rigidbody의 Y축 고정을 풉니다.
 
         yield return deathWaitTime;

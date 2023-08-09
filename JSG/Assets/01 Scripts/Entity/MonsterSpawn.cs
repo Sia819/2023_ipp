@@ -13,24 +13,34 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] private GameObject mobHellephant;
     [SerializeField] private int spawnMax = 50;
 
-    private WaitForSeconds spawnTime = new WaitForSeconds(1f);
-    
-    private int spawnCount = 0;
+    private WaitForSeconds spawnTime = new WaitForSeconds(1.5f);
 
     void Start()
     {
-        if (GameManager.Instance.isPlaying)
+        GameManager.Instance.OnGameResetted += OnResetted;
+
+        if (GameManager.Instance.IsPlaying)
         {
             StartCoroutine(Spawn());
         }
     }
 
+    // 게임이 초기화 되었을 때, 모든 몬스터를 삭제합니다.
+    private void OnResetted()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        StartCoroutine(Spawn());
+    }
+
     /// <summary> 몬스터를 생성합니다. </summary>
     IEnumerator Spawn()
     {
-        while (GameManager.Instance.isPlaying)
+        while (GameManager.Instance.IsPlaying)
         {
-            if (spawnMax <= spawnCount)
+            if (spawnMax <= GameManager.Instance.MonsterCount)
             {
                 yield return spawnTime;
                 continue;
@@ -54,7 +64,7 @@ public class MonsterSpawn : MonoBehaviour
                 else if (spawnType > 14) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
-            spawnCount++;
+            GameManager.Instance.MonsterCount++;
             yield return spawnTime;
         }
     }

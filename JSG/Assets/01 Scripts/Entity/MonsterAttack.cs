@@ -39,7 +39,7 @@ public class MonsterAttack : MonoBehaviour
     {
         do
         {
-            GameManager.Instance.Player.CurrentHp -= monster.damage;
+            GameManager.Instance.Player.CurrentHp -= monster.Damage;
             yield return attackTime;
         } while (continuousAttack);
     }

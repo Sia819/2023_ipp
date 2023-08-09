@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private bool isFiring;
     private bool isFiringCanAttackable;     // 레이저 발생 시점 한번 만 공격하여, 업데이트 문에서 지속적 데미지를 입히는 문제를 방지
     private readonly WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
-    private readonly WaitForSeconds fireRateDuration = new WaitForSeconds(0.1f);
+    private readonly WaitForSeconds fireRateDuration = new WaitForSeconds(0.2f);
 
     void Awake()
     {
@@ -43,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
 
                 if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
                 {
-                    monster.CurrentHp -= player.damage;
+                    monster.CurrentHp -= player.Damage;
                     isFiringCanAttackable = false;      // 중복 공격 방지
                     Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
                 }
@@ -60,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (player.IsAlive == false) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (!isFiring)
             {
@@ -68,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
                 StartCoroutine(FireLaser());
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else
         {
             isFiring = false; // 코루틴의 반복을 중단합니다
             lineRenderer.enabled = false; // 레이저 숨기기

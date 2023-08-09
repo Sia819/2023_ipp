@@ -14,8 +14,8 @@ public abstract class Entity : MonoBehaviour
     public event HpChangedHandler OnHpChanged;
     public event DeathHandler OnDeath;
 
-    public float maxHp = 100f;
-    public float damage = 20f;
+    [field: SerializeField] public float MaxHp { get; set; } = 100f;
+    [field: SerializeField] public float Damage { get; set; } = 20f;
 
     private float currentHp;
     private bool isMoving;
@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
                 OnDeath?.Invoke();
             }    
 
-            OnHpChanged?.Invoke(this.currentHp, maxHp);
+            OnHpChanged?.Invoke(this.currentHp, MaxHp);
         }
     }
 
@@ -61,6 +61,6 @@ public abstract class Entity : MonoBehaviour
 
     void Awake()
     {
-        currentHp = maxHp;
+        currentHp = MaxHp;
     }
 }
