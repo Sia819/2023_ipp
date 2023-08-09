@@ -13,7 +13,7 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] private GameObject mobHellephant;
     [SerializeField] private int spawnMax = 50;
 
-    private WaitForSeconds spawnTime = new WaitForSeconds(1.5f);
+    private WaitForSeconds spawnTime = new WaitForSeconds(1.2f);
 
     void Start()
     {

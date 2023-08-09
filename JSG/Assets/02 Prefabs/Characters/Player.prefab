@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6859dd038d98b42b76274a909027d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHp>k__BackingField: 100
+  <MaxHp>k__BackingField: 200
   <Damage>k__BackingField: 20
   <GunFlareTransform>k__BackingField: {fileID: 2478348227804668513}
   <GunLight>k__BackingField: {fileID: 4488450925047324739}
@@ -2065,7 +2065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6504e9c46e8b04ba1ccedb552b262c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
 --- !u!114 &1535167476455549430
 MonoBehaviour:
   m_ObjectHideFlags: 0
