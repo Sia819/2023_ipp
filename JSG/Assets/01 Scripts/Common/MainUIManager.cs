@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Entity;
 
 public class MainUIManager : Singleton<MainUIManager>
 {
@@ -46,14 +48,14 @@ public class MainUIManager : Singleton<MainUIManager>
         gameScore.text = $"SCORE: {score}";
     }
 
-    private void HpUpdate(float currentHp, float maxHp)
+    private void HpUpdate(object sender, HpChangedEventArgs args)
     {
-        playerHpBar.value = currentHp;
-        playerHpPoint.text = $"{currentHp}/{maxHp}";
+        playerHpBar.value = args.CurrentHp;
+        playerHpPoint.text = $"{args.CurrentHp}/{args.MaxHp}";
         uiAnimator.SetTrigger("Damaged");
     }
 
-    private void DeathUI()
+    private void DeathUI(object sender, EventArgs args)
     {
         uiAnimator.SetTrigger("Death");
     }

@@ -11,17 +11,15 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
+            _instance ??= FindObjectOfType<T>();
+            // T가 초기화 되지 않았거나, 프로그램이 종료 중이지 않을 때 싱글톤 오브젝트를 생성합니다.
+            if (_instance == null && Time.timeScale != 0)
             {
-                _instance = FindObjectOfType<T>();
-                // T가 초기화 되지 않았거나, 프로그램이 종료 중이지 않을 때 싱글톤 오브젝트를 생성합니다.
-                if (_instance == null && Time.timeScale != 0) 
-                {
-                    GameObject singleton = new GameObject();
-                    _instance = singleton.AddComponent<T>();
-                    singleton.name = typeof(T).ToString() + " (Singleton)";
-                }
+                GameObject singleton = new GameObject();
+                _instance = singleton.AddComponent<T>();
+                singleton.name = typeof(T).ToString() + " (Singleton)";
             }
+
             return _instance;
         }
     }
@@ -40,5 +38,5 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    
+
 }

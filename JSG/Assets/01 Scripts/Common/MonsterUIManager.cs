@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Entity;
 
 [RequireComponent(typeof(Monster))]
 public class MonsterUIManager : MonoBehaviour
@@ -47,14 +48,14 @@ public class MonsterUIManager : MonoBehaviour
     }
 
 
-    void HpBarUpdate(float currentHp, float maxHp)
+    void HpBarUpdate(object sender, HpChangedEventArgs args)
     {
         // 체력바를 활성화합니다.
         monsterUI.gameObject.SetActive(true);
-        monsterHpBar.value = currentHp;
+        monsterHpBar.value = args.CurrentHp;
 
         // 체력이 0이라면 체력바를 즉시 숨깁니다.
-        if (currentHp <= 0)
+        if (args.CurrentHp <= 0)
         {
             monsterUI.gameObject.SetActive(false);
             return;

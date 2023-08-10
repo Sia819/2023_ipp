@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Entity;
 
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Animator))]
@@ -26,15 +27,15 @@ public class EntityAnimationController : MonoBehaviour
         GameManager.Instance.OnGameResetted -= OnResetted;
     }
 
-    private void MovingAnimation(bool moving)
+    private void MovingAnimation(object sender, MoveStateEventArgs args)
     {
-        if (moving)
+        if (args.IsMoving)
             animator.SetTrigger("MoveTrg");
         else
             animator.SetTrigger("StopTrg");
     }
 
-    private void DeathAnimation()
+    private void DeathAnimation(object sender, EventArgs args)
     {
         animator.SetTrigger("DeathTrg");
         animator.SetBool("Death", true);

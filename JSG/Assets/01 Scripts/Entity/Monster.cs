@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class Monster : Entity
         this.OnDeath -= DeathAction;
     }
 
-    private void DeathAction()
+    private void DeathAction(object sender, EventArgs args)
     {
         GameManager.Instance.GameScore += ScorePoint;   // ScorePointAdd
         StartCoroutine(DeathProcess());

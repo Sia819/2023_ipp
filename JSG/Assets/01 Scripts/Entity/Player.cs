@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class Player : Entity
     }
 
     // 플레이어가 죽은 경우
-    private void Death()
+    private void Death(object sender, EventArgs args)
     {
         GameManager.Instance.IsPlaying = false;
     }

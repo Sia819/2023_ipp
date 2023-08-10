@@ -1825,6 +1825,7 @@ GameObject:
   - component: {fileID: 1858317041368761341}
   - component: {fileID: 511301869345000123}
   - component: {fileID: 1535167476455549430}
+  - component: {fileID: 4039463081230463931}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2082,6 +2083,21 @@ MonoBehaviour:
   gunEnd: {fileID: 2478348227804668513}
   gunParticle: {fileID: 19800000, guid: 0bd11145ced4539458f937fc4609544a, type: 3}
   hitParticle: {fileID: 19800000, guid: ef39ae7291c751249b296f00bf6fb042, type: 3}
+--- !u!114 &4039463081230463931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762744929058676194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f56ec2f9c633e4fbc9c8f7edb0a9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hertClip: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
+  deathClip: {fileID: 8300000, guid: fa7f046ce321d4021b5e753bf1152916, type: 3}
+  attackClip: {fileID: 8300000, guid: fa7f046ce321d4021b5e753bf1152916, type: 3}
 --- !u!1 &6834319293565469626
 GameObject:
   m_ObjectHideFlags: 0
