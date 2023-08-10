@@ -77,7 +77,7 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator FireLaser()
     {
-        while (isFiring)
+        while (isFiring && player.IsAlive)
         {
             // 레이저와 불빛을 표시합니다.
             lineRenderer.enabled = true;
