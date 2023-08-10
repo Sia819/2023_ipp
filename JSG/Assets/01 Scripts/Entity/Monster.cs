@@ -21,21 +21,22 @@ public class Monster : Entity
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 
-        this.OnDeath += ScorePointAdd;
-        this.OnDeath += () => StartCoroutine(deathAction());
+        this.OnDeath += DeathAction;
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.MonsterCount = 0;
+        this.OnDeath -= DeathAction;
     }
 
-    void ScorePointAdd()
+    private void DeathAction()
     {
-        GameManager.Instance.GameScore += ScorePoint;
+        GameManager.Instance.GameScore += ScorePoint;   // ScorePointAdd
+        StartCoroutine(DeathProcess());
     }
 
-    IEnumerator deathAction()
+    private IEnumerator DeathProcess()
     {
         yield return deathWaitTime;
         boundCollider.enabled = false;

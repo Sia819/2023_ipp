@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (player.IsAlive == false) return;
 
-        /////////////// Laser trail calculate ///////////////
+        /////////////// 레이저 트레일 계산 ///////////////
         if (lineRenderer.enabled)
         {
             // 총구의 시작과 끝을 기준으로 방향 값만 가져와 ray를 생성
