@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Player player;
-    private float speedCorrectionY = 1.2f; // Player movement ¼¼·ÎÃà º¸Á¤ °ª
+    private float speedCorrectionY = 1.2f; // Player movement ì„¸ë¡œì¶• ë³´ì • ê°’
 
     void Start()
     {
@@ -26,17 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
         /////////////// Look at mouse ///////////////
 
-        // Ä«¸Ş¶ó¿¡¼­ ¸¶¿ì½º Ä¿¼­·Î ray cast »ı¼º
+        // ì¹´ë©”ë¼ì—ì„œ ë§ˆìš°ìŠ¤ ì»¤ì„œë¡œ ray cast ìƒì„±
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
 
         //Physics.Raycast(ray, out RaycastHit hit, 100f)
-        // ray cast ¼öÇà ½Ã 100¹ÌÅÍ ¾È¿¡¼­ ¹«¾ğ°¡°¡ ºÎµúÈ÷¸é
+        // ray cast ìˆ˜í–‰ ì‹œ 100ë¯¸í„° ì•ˆì—ì„œ ë¬´ì–¸ê°€ê°€ ë¶€ë”ªíˆë©´
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag("Floor"))
             {
-                // ray floor hit point¸¦ ÇâÇÏµµ·Ï Player¸¦ È¸Àü
+                // ray floor hit pointë¥¼ í–¥í•˜ë„ë¡ Playerë¥¼ íšŒì „
                 transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
             }
         }
@@ -51,14 +51,14 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        // ¿òÁ÷ÀÓ ¼Ó¼º °ª ¾÷µ¥ÀÌÆ®
+        // ì›€ì§ì„ ì†ì„± ê°’ ì—…ë°ì´íŠ¸
         if (!(moveHorizontal == 0 && moveVertical == 0))
             player.IsMoving = true;
         else if (moveHorizontal == 0 && moveVertical == 0)
             player.IsMoving = false;
 
-        // ¹°¸® ¿òÁ÷ÀÓ ±¸Çö
-        Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // YÃà º¸Á¤°ª 
+        // ë¬¼ë¦¬ ì›€ì§ì„ êµ¬í˜„
+        Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // Yì¶• ë³´ì •ê°’ 
         rb.MovePosition(transform.position + (destination * speed * Time.fixedDeltaTime));
     }
 }

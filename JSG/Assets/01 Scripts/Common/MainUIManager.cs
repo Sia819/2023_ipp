@@ -18,24 +18,24 @@ public class MainUIManager : Singleton<MainUIManager>
 
     void Start()
     {
-        // ÇÃ·¹ÀÌ¾î Ã¼·Â ÃÊ±â¼³Á¤
+        // í”Œë ˆì´ì–´ ì²´ë ¥ ì´ˆê¸°ì„¤ì •
         Player player = GameManager.Instance.Player;
-        playerHpBar.maxValue = player.MaxHp;    // ÃÖ´ë Ã¼·Â ¼³Á¤
+        playerHpBar.maxValue = player.MaxHp;    // ìµœëŒ€ ì²´ë ¥ ì„¤ì •
         player.OnHpChanged += HpUpdate;
         player.OnDeath += DeathUI;
 
-        // Á¡¼ö ¾÷µ¥ÀÌÆ® ÀÌº¥Æ® ÇÔ¼ö µî·Ï
+        // ì ìˆ˜ ì—…ë°ì´íŠ¸ ì´ë²¤íŠ¸ í•¨ìˆ˜ ë“±ë¡
         GameManager.Instance.OnGameScoreChanged += gameScoreChange;
 
-        // ÃÊ±â Ã¼·Â°ª ¼³Á¤
+        // ì´ˆê¸° ì²´ë ¥ê°’ ì„¤ì •
         playerHpBar.value = player.CurrentHp;
         playerHpPoint.text = $"{player.CurrentHp}/{player.MaxHp}";
 
-        // °ÔÀÓ ÃÊ±âÈ­ ¹öÆ°À» ´­·¶À» ¶§ µ¿ÀÛ
+        // ê²Œì„ ì´ˆê¸°í™” ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ë™ì‘
         restartButton.onClick.AddListener(OnGameResetted);
 
-        // ¹öÆ° ÇÏÀÌ¶óÀÌÆÃ µ¿ÀÛ ¿ÀÀÛµ¿ °³¼±, mainUI Canvas¿¡ Focus°¡ µÇ¾îÀÖÁö ¾ÊÀº °æ¿ì Àç½ÃÀÛ ¹öÆ°ÀÇ ÇÏÀÌ¶óÀÌÆÃÀÌ È°¼ºÈ­ µÇÁö ¾ÊÀ½.
-        // µû¶ó¼­ ¹öÆ°ÀÇ À§¿¡ ¸¶¿ì½º°¡ ¿À¹öµÉ ¶§ Äµ¹ö½º°¡ Æ÷Ä¿½º µÇµµ·Ï ÇÔ.
+        // ë²„íŠ¼ í•˜ì´ë¼ì´íŒ… ë™ì‘ ì˜¤ì‘ë™ ê°œì„ , mainUI Canvasì— Focusê°€ ë˜ì–´ìˆì§€ ì•Šì€ ê²½ìš° ì¬ì‹œì‘ ë²„íŠ¼ì˜ í•˜ì´ë¼ì´íŒ…ì´ í™œì„±í™” ë˜ì§€ ì•ŠìŒ.
+        // ë”°ë¼ì„œ ë²„íŠ¼ì˜ ìœ„ì— ë§ˆìš°ìŠ¤ê°€ ì˜¤ë²„ë  ë•Œ ìº”ë²„ìŠ¤ê°€ í¬ì»¤ìŠ¤ ë˜ë„ë¡ í•¨.
         EventTrigger eventTrigger = restartButton.gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerEnter;

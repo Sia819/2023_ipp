@@ -36,11 +36,11 @@ public abstract class Entity : MonoBehaviour
     public delegate void HpChangedHandler(object sender, HpChangedEventArgs args);
     public delegate void DeathHandler(object sender, EventArgs args);
 
-    /// <summary> EntityÀÇ ÀÌµ¿»óÅÂ º¯°æ½Ã ÀÌº¥Æ® </summary>
+    /// <summary> Entityì˜ ì´ë™ìƒíƒœ ë³€ê²½ì‹œ ì´ë²¤íŠ¸ </summary>
     public event MoveStateChangedHandler OnMoveStateChanged;
-    /// <summary> EntityÀÇ Ã¼·Â º¯°æ½Ã ÀÌº¥Æ® </summary>
+    /// <summary> Entityì˜ ì²´ë ¥ ë³€ê²½ì‹œ ì´ë²¤íŠ¸ </summary>
     public event HpChangedHandler OnHpChanged;
-    /// <summary> Entity°¡ »ç¸Á½Ã ÀÌº¥Æ® </summary>
+    /// <summary> Entityê°€ ì‚¬ë§ì‹œ ì´ë²¤íŠ¸ </summary>
     public event DeathHandler OnDeath;
 
     [field: SerializeField] public float MaxHp { get; set; } = 100f;
@@ -49,16 +49,16 @@ public abstract class Entity : MonoBehaviour
     private float currentHp;
     private bool isMoving;
 
-    /// <summary> Entity°¡ ÇöÀç »ì¾ÆÀÖ´ÂÁöÀÇ ¿©ºÎÀÔ´Ï´Ù. </summary>
+    /// <summary> Entityê°€ í˜„ì¬ ì‚´ì•„ìˆëŠ”ì§€ì˜ ì—¬ë¶€ì…ë‹ˆë‹¤. </summary>
     public bool IsAlive => currentHp > 0f;
 
-    /// <summary> ÇöÀç EntityÀÇ Ã¼·ÂÀÔ´Ï´Ù. </summary>
+    /// <summary> í˜„ì¬ Entityì˜ ì²´ë ¥ì…ë‹ˆë‹¤. </summary>
     public float CurrentHp
     {
         get => this.currentHp;
         set
         {
-            // °°Àº °ªÀ» ´ëÀÔÇÏ·Á°í ÇÏ°Å³ª, Ã¼·ÂÀ» 0º¸´Ù Àû°Ô ¼³Á¤ÇÒ ¼ö ¾ø½À´Ï´Ù.
+            // ê°™ì€ ê°’ì„ ëŒ€ì…í•˜ë ¤ê³  í•˜ê±°ë‚˜, ì²´ë ¥ì„ 0ë³´ë‹¤ ì ê²Œ ì„¤ì •í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
             if (this.currentHp == value) return;
             if (value < 0 && this.currentHp == 0) return;
 
@@ -74,7 +74,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    /// <summary> Entity°¡ ÇöÀç ÀÌµ¿ ÁßÀÎÁöÀÇ ¿©ºÎÀÔ´Ï´Ù. </summary>
+    /// <summary> Entityê°€ í˜„ì¬ ì´ë™ ì¤‘ì¸ì§€ì˜ ì—¬ë¶€ì…ë‹ˆë‹¤. </summary>
     public virtual bool IsMoving
     {
         get => this.isMoving;

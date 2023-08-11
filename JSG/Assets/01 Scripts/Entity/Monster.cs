@@ -41,7 +41,7 @@ public class Monster : Entity
     {
         yield return deathWaitTime;
         boundCollider.enabled = false;
-        rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // rigidbodyÀÇ YÃà °íÁ¤À» Ç±´Ï´Ù.
+        rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // rigidbodyì˜ Yì¶• ê³ ì •ì„ í’‰ë‹ˆë‹¤.
 
         yield return deathWaitTime;
         Destroy(this.gameObject);

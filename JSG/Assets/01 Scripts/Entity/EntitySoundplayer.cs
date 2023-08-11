@@ -19,13 +19,13 @@ public class EntitySoundplayer : MonoBehaviour
     {
         entity = GetComponent<Entity>();
 
-        // ÀÔÀ¸·Î ¼Ò¸®³»´Â ¿Àµğ¿À Å¬¸³ÀÌ Ãß°¡µÈ °æ¿ì¸¸ ¿Àµğ¿À ¼Ò½º ÄÄÆ÷³ÍÆ®¸¦ Ãß°¡ÇÕ´Ï´Ù.
+        // ì…ìœ¼ë¡œ ì†Œë¦¬ë‚´ëŠ” ì˜¤ë””ì˜¤ í´ë¦½ì´ ì¶”ê°€ëœ ê²½ìš°ë§Œ ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì»´í¬ë„ŒíŠ¸ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
         if (hertClip != null || deathClip != null)
         {
             entitySound = this.gameObject.AddComponent<AudioSource>();
             entitySound.playOnAwake = false;
 
-            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);    // entitySound.clipÀ» ÃÊ±âÈ­
+            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);    // entitySound.clipì„ ì´ˆê¸°í™”
 
             if (hertClip != null)
             {
@@ -37,12 +37,12 @@ public class EntitySoundplayer : MonoBehaviour
             }
         }
 
-        // ÀÔÀÌ ¾Æ´Ñ ´Ù¸¥°÷¿¡¼­ ¼Ò¸®°¡ ³ª´Â°æ¿ì µ¿½Ã¿¡ ¼Ò¸®°¡ Àç»ıµÉ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù.
+        // ì…ì´ ì•„ë‹Œ ë‹¤ë¥¸ê³³ì—ì„œ ì†Œë¦¬ê°€ ë‚˜ëŠ”ê²½ìš° ë™ì‹œì— ì†Œë¦¬ê°€ ì¬ìƒë  ìˆ˜ ìˆë„ë¡ í•©ë‹ˆë‹¤.
         if (deathClip != null)
         {
             effectSound = this.gameObject.AddComponent<AudioSource>();
             effectSound.playOnAwake = false;
-            effectSound.clip = (deathClip != null ? deathClip : entitySound.clip);  // entitySound.clipÀ» ÃÊ±âÈ­
+            effectSound.clip = (deathClip != null ? deathClip : entitySound.clip);  // entitySound.clipì„ ì´ˆê¸°í™”
         }
     }
 

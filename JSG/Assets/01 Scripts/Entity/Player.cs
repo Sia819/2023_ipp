@@ -15,7 +15,7 @@ public class Player : Entity
         GameManager.Instance.OnGameResetted += OnResetted;
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ Á×Àº °æ¿ì
+    // í”Œë ˆì´ì–´ê°€ ì£½ì€ ê²½ìš°
     private void Death(object sender, EventArgs args)
     {
         GameManager.Instance.IsPlaying = false;

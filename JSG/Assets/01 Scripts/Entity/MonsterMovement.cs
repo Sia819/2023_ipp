@@ -8,15 +8,15 @@ using UnityEngine.AI;
 public class MonsterMovement : MonoBehaviour
 {
     private Monster monster;
-    private Player player;              // ÇÃ·¹ÀÌ¾îÀÇ Transform
-    private NavMeshAgent navAgent;      // NavMesh Agent ÄÄÆ÷³ÍÆ®
-    private readonly WaitForSeconds pathUpdateRate = new WaitForSeconds(1f);      // °æ·Î ¾÷µ¥ÀÌÆ® ºóµµ (ÃÊ ´ÜÀ§)
+    private Player player;              // í”Œë ˆì´ì–´ì˜ Transform
+    private NavMeshAgent navAgent;      // NavMesh Agent ì»´í¬ë„ŒíŠ¸
+    private readonly WaitForSeconds pathUpdateRate = new WaitForSeconds(1f);      // ê²½ë¡œ ì—…ë°ì´íŠ¸ ë¹ˆë„ (ì´ˆ ë‹¨ìœ„)
 
     void Start()
     {
         monster = GetComponent<Monster>();
-        navAgent = GetComponent<NavMeshAgent>(); // Nav Mesh Agent ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-        navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // Àå¾Ö¹° È¸ÇÇ Ç°Áú ¼³Á¤
+        navAgent = GetComponent<NavMeshAgent>(); // Nav Mesh Agent ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // ì¥ì• ë¬¼ íšŒí”¼ í’ˆì§ˆ ì„¤ì •
         player = GameManager.Instance.Player;
         StartCoroutine(Move());
     }
@@ -25,7 +25,7 @@ public class MonsterMovement : MonoBehaviour
     {
         while (GameManager.Instance.IsPlaying && monster.IsAlive)
         {
-            navAgent.SetDestination(player.transform.position); // ÇÃ·¹ÀÌ¾î À§Ä¡·Î ¸ñÀûÁö ¼³Á¤
+            navAgent.SetDestination(player.transform.position); // í”Œë ˆì´ì–´ ìœ„ì¹˜ë¡œ ëª©ì ì§€ ì„¤ì •
             yield return pathUpdateRate;
         }
         this.navAgent.isStopped = true;

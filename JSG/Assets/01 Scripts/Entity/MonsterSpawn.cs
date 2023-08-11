@@ -25,7 +25,7 @@ public class MonsterSpawn : MonoBehaviour
         }
     }
 
-    // °ÔÀÓÀÌ ÃÊ±âÈ­ µÇ¾úÀ» ¶§, ¸ğµç ¸ó½ºÅÍ¸¦ »èÁ¦ÇÕ´Ï´Ù.
+    // ê²Œì„ì´ ì´ˆê¸°í™” ë˜ì—ˆì„ ë•Œ, ëª¨ë“  ëª¬ìŠ¤í„°ë¥¼ ì‚­ì œí•©ë‹ˆë‹¤.
     private void OnResetted()
     {
         foreach (Transform child in transform)
@@ -35,7 +35,7 @@ public class MonsterSpawn : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    /// <summary> ¸ó½ºÅÍ¸¦ »ı¼ºÇÕ´Ï´Ù. </summary>
+    /// <summary> ëª¬ìŠ¤í„°ë¥¼ ìƒì„±í•©ë‹ˆë‹¤. </summary>
     IEnumerator Spawn()
     {
         while (GameManager.Instance.IsPlaying)
@@ -47,16 +47,16 @@ public class MonsterSpawn : MonoBehaviour
             }
 
             Vector3 spawnPoint;
-            int spawnType = Random.Range(0, 20);    // ·£´ı °ªÀ¸·Î ¾îµğ¿¡ ¾î¶² ¸ó½ºÅÍ°¡ ½ºÆùµÉ Áö °áÁ¤µË´Ï´Ù.
+            int spawnType = Random.Range(0, 20);    // ëœë¤ ê°’ìœ¼ë¡œ ì–´ë””ì— ì–´ë–¤ ëª¬ìŠ¤í„°ê°€ ìŠ¤í°ë  ì§€ ê²°ì •ë©ë‹ˆë‹¤.
 
-            if (spawnType < 6) // Áã±¸¸Û¿¡¼­ ¸ó½ºÅÍ »ı¼º
+            if (spawnType < 6) // ì¥êµ¬ë©ì—ì„œ ëª¬ìŠ¤í„° ìƒì„±
             {
                 spawnPoint = GenRandomPoint(spawnHole);
 
                 if (spawnType < 4) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
             }
-            else // ¹Ù´Ú¿¡¼­ ¸ó½ºÅÍ »ı¼º
+            else // ë°”ë‹¥ì—ì„œ ëª¬ìŠ¤í„° ìƒì„±
             {
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
@@ -69,20 +69,20 @@ public class MonsterSpawn : MonoBehaviour
         }
     }
 
-    /// <summary> ¸ó½ºÅÍ¸¦ ½ºÆùÇÒ ÁöÁ¡À» »ı¼ºÇÕ´Ï´Ù. </summary>
-    /// <returns> ½ºÆù°¡´ÉÇÑ ¿µ¿ªÀÇ ÁÂÇ¥¸¦ ¸®ÅÏÇÕ´Ï´Ù. </returns>
+    /// <summary> ëª¬ìŠ¤í„°ë¥¼ ìŠ¤í°í•  ì§€ì ì„ ìƒì„±í•©ë‹ˆë‹¤. </summary>
+    /// <returns> ìŠ¤í°ê°€ëŠ¥í•œ ì˜ì—­ì˜ ì¢Œí‘œë¥¼ ë¦¬í„´í•©ë‹ˆë‹¤. </returns>
     Vector3 GenRandomPoint(BoxCollider spawnArea, bool considerCamera = false)
     {
         Vector3 spawnPoint;
 
         do
         {
-            // ·ÎÄÃ °ø°£¿¡¼­ ·£´ıÇÑ Á¡À» »ı¼ºÇÕ´Ï´Ù.
+            // ë¡œì»¬ ê³µê°„ì—ì„œ ëœë¤í•œ ì ì„ ìƒì„±í•©ë‹ˆë‹¤.
             float x = Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2);
             float z = Random.Range(-spawnArea.size.z / 2, spawnArea.size.z / 2);
             Vector3 localPoint = new Vector3(x, 0, z);
 
-            // ·ÎÄÃ °ø°£¿¡¼­ÀÇ Á¡À» ¿ùµå °ø°£À¸·Î º¯È¯ÇÕ´Ï´Ù.
+            // ë¡œì»¬ ê³µê°„ì—ì„œì˜ ì ì„ ì›”ë“œ ê³µê°„ìœ¼ë¡œ ë³€í™˜í•©ë‹ˆë‹¤.
             spawnPoint = spawnArea.transform.TransformPoint(localPoint);
         }
         while (IsPointInExpertArea(spawnPoint, spawnArea) && IsPointInCameraView(spawnPoint, considerCamera));
@@ -90,29 +90,29 @@ public class MonsterSpawn : MonoBehaviour
         return spawnPoint;
     }
 
-    /// <summary> ÇØ´ç À§Ä¡¿¡ ½ºÆù °¡´ÉÇÑÁö Àå¾Ö¹° ¿©ºÎ¸¦ Ã¼Å©ÇÕ´Ï´Ù. </summary>
-    /// <returns> true = ½ºÆù °¡´ÉÇÑ ¿µ¿ªÀÔ´Ï´Ù. false = ½ºÆù ºÒ°¡´ÉÇÑ ¿µ¿ªÀÔ´Ï´Ù. </returns>
+    /// <summary> í•´ë‹¹ ìœ„ì¹˜ì— ìŠ¤í° ê°€ëŠ¥í•œì§€ ì¥ì• ë¬¼ ì—¬ë¶€ë¥¼ ì²´í¬í•©ë‹ˆë‹¤. </summary>
+    /// <returns> true = ìŠ¤í° ê°€ëŠ¥í•œ ì˜ì—­ì…ë‹ˆë‹¤. false = ìŠ¤í° ë¶ˆê°€ëŠ¥í•œ ì˜ì—­ì…ë‹ˆë‹¤. </returns>
     bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea)
     {
-        // point À§Ä¡¿¡¼­ ¾Æ·¡·Î ·¹ÀÌ¸¦ ¹ß»çÇÕ´Ï´Ù.
+        // point ìœ„ì¹˜ì—ì„œ ì•„ë˜ë¡œ ë ˆì´ë¥¼ ë°œì‚¬í•©ë‹ˆë‹¤.
         Ray ray = new Ray(point + Vector3.up * 100, Vector3.down);
         RaycastHit hit;
 
-        // ·¹ÀÌ°¡ ¾î¶² Äİ¶óÀÌ´õ¿Í ºÎµóÈ÷´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+        // ë ˆì´ê°€ ì–´ë–¤ ì½œë¼ì´ë”ì™€ ë¶€ë”›íˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
         if (Physics.Raycast(ray, out hit))
         {
-            // ·¹ÀÌ°¡ ºÎµóÈù Äİ¶óÀÌ´õ°¡ spawnArea¿Í °°´Ù¸é true¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+            // ë ˆì´ê°€ ë¶€ë”›íŒ ì½œë¼ì´ë”ê°€ spawnAreaì™€ ê°™ë‹¤ë©´ trueë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
             if (hit.collider == spawnArea)
             {
                 return true;
             }
         }
 
-        return false; // ±× ¿ÜÀÇ °æ¿ì¿¡´Â false¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+        return false; // ê·¸ ì™¸ì˜ ê²½ìš°ì—ëŠ” falseë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     }
 
-    /// <summary> ÇØ´ç À§Ä¡°¡ Ä«¸Ş¶ó¿¡ º¸¿©Áö´Â ¿©ºÎ¸¦ Ã¼Å©ÇÕ´Ï´Ù. </summary>
-    /// <returns> true = À§Ä¡´Â Ä«¸Ş¶ó¿¡ º¸¿©Áı´Ï´Ù. false = À§Ä¡´Â Ä«¸Ş¶ó¿¡ º¸¿©ÁöÁö ¾Ê½À´Ï´Ù. </returns>
+    /// <summary> í•´ë‹¹ ìœ„ì¹˜ê°€ ì¹´ë©”ë¼ì— ë³´ì—¬ì§€ëŠ” ì—¬ë¶€ë¥¼ ì²´í¬í•©ë‹ˆë‹¤. </summary>
+    /// <returns> true = ìœ„ì¹˜ëŠ” ì¹´ë©”ë¼ì— ë³´ì—¬ì§‘ë‹ˆë‹¤. false = ìœ„ì¹˜ëŠ” ì¹´ë©”ë¼ì— ë³´ì—¬ì§€ì§€ ì•ŠìŠµë‹ˆë‹¤. </returns>
     bool IsPointInCameraView(Vector3 point, bool considerCamera)
     {
         if (considerCamera == false)

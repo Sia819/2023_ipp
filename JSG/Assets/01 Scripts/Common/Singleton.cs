@@ -12,7 +12,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         get
         {
             _instance ??= FindObjectOfType<T>();
-            // T°¡ ÃÊ±âÈ­ µÇÁö ¾Ê¾Ò°Å³ª, ÇÁ·Î±×·¥ÀÌ Á¾·á ÁßÀÌÁö ¾ÊÀ» ¶§ ½Ì±ÛÅæ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÕ´Ï´Ù.
+            // Tê°€ ì´ˆê¸°í™” ë˜ì§€ ì•Šì•˜ê±°ë‚˜, í”„ë¡œê·¸ë¨ì´ ì¢…ë£Œ ì¤‘ì´ì§€ ì•Šì„ ë•Œ ì‹±ê¸€í†¤ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
             if (_instance == null && Time.timeScale != 0)
             {
                 GameObject singleton = new GameObject();
@@ -34,7 +34,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else if (_instance != this)
         {
             Destroy(this);
-            Debug.LogWarning($"{typeof(T).Name}°¡ ÇÏ³ª ÀÌ»ó Á¸ÀçÇÕ´Ï´Ù!");
+            Debug.LogWarning($"{typeof(T).Name}ê°€ í•˜ë‚˜ ì´ìƒ ì¡´ì¬í•©ë‹ˆë‹¤!");
         }
     }
 

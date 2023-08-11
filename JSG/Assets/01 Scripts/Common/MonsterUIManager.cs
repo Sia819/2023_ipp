@@ -25,47 +25,47 @@ public class MonsterUIManager : MonoBehaviour
         monsterHpBar.maxValue = monster.MaxHp;
         monsterHpBar.value = monster.CurrentHp;
 
-        // ÃÊ±â »óÅÂ¿¡¼­ Ã¼·Â¹Ù¿Í Äµ¹ö½º¸¦ ¼û±é´Ï´Ù.
+        // ì´ˆê¸° ìƒíƒœì—ì„œ ì²´ë ¥ë°”ì™€ ìº”ë²„ìŠ¤ë¥¼ ìˆ¨ê¹ë‹ˆë‹¤.
         monsterUI.gameObject.SetActive(false);
     }
 
-    // ¸Å ¾÷µ¥ÀÌÆ®¸¶´Ù ¸ó½ºÅÍÀÇ Ã¼·Â¹ÙÀÇ À§Ä¡¸¦ Ä«¸Ş¶ó¸¦ ÇâÇÏµµ·Ï º¸Á¤ÇÕ´Ï´Ù.
+    // ë§¤ ì—…ë°ì´íŠ¸ë§ˆë‹¤ ëª¬ìŠ¤í„°ì˜ ì²´ë ¥ë°”ì˜ ìœ„ì¹˜ë¥¼ ì¹´ë©”ë¼ë¥¼ í–¥í•˜ë„ë¡ ë³´ì •í•©ë‹ˆë‹¤.
     void LateUpdate()
     {
-        // À§Ä¡¸¦ ±â¹İÀ¸·Î Ã¼·Â¹ÙÀÇ ÃÊ±â À§Ä¡¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+        // ìœ„ì¹˜ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì²´ë ¥ë°”ì˜ ì´ˆê¸° ìœ„ì¹˜ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
         Vector3 initialPosition = this.transform.localPosition + HPBAR_POS_OFFSET;
 
-        // ¸ó½ºÅÍ À§Ä¡¿¡¼­ Ä«¸Ş¶ó ¹æÇâÀ¸·Î Á¶±İ ÀÌµ¿ÇÑ À§Ä¡·Î Ã¼·Â¹Ù¸¦ ÀÌµ¿ÇÕ´Ï´Ù.
+        // ëª¬ìŠ¤í„° ìœ„ì¹˜ì—ì„œ ì¹´ë©”ë¼ ë°©í–¥ìœ¼ë¡œ ì¡°ê¸ˆ ì´ë™í•œ ìœ„ì¹˜ë¡œ ì²´ë ¥ë°”ë¥¼ ì´ë™í•©ë‹ˆë‹¤.
         Vector3 cameraDirection = (initialPosition - mainCamera.transform.localPosition).normalized;
         monsterUI.transform.position = initialPosition + cameraDirection * 1f;
 
-        // Ã¼·Â¹Ù°¡ Ç×»ó Ä«¸Ş¶ó¸¦ ¹Ù¶óº¸°Ô ÇÕ´Ï´Ù.
+        // ì²´ë ¥ë°”ê°€ í•­ìƒ ì¹´ë©”ë¼ë¥¼ ë°”ë¼ë³´ê²Œ í•©ë‹ˆë‹¤.
         monsterUI.transform.LookAt(initialPosition + mainCamera.transform.rotation * Vector3.forward,
                                          mainCamera.transform.rotation * Vector3.up);
 
-        // Ã¼·Â¹ÙÀÇ È¸ÀüÀ» YÃàÀ» Áß½ÉÀ¸·Î 180µµ È¸Àü½ÃÅµ´Ï´Ù.
+        // ì²´ë ¥ë°”ì˜ íšŒì „ì„ Yì¶•ì„ ì¤‘ì‹¬ìœ¼ë¡œ 180ë„ íšŒì „ì‹œí‚µë‹ˆë‹¤.
         monsterUI.transform.Rotate(0, 180, 0);
     }
 
 
     void HpBarUpdate(object sender, HpChangedEventArgs args)
     {
-        // Ã¼·Â¹Ù¸¦ È°¼ºÈ­ÇÕ´Ï´Ù.
+        // ì²´ë ¥ë°”ë¥¼ í™œì„±í™”í•©ë‹ˆë‹¤.
         monsterUI.gameObject.SetActive(true);
         monsterHpBar.value = args.CurrentHp;
 
-        // Ã¼·ÂÀÌ 0ÀÌ¶ó¸é Ã¼·Â¹Ù¸¦ Áï½Ã ¼û±é´Ï´Ù.
+        // ì²´ë ¥ì´ 0ì´ë¼ë©´ ì²´ë ¥ë°”ë¥¼ ì¦‰ì‹œ ìˆ¨ê¹ë‹ˆë‹¤.
         if (args.CurrentHp <= 0)
         {
             monsterUI.gameObject.SetActive(false);
             return;
         }
 
-        // ÀÌ¹Ì ½ÇÇà ÁßÀÎ ¼û±â±â ÄÚ·çÆ¾ÀÌ ÀÖ´Ù¸é ÁßÁö½ÃÅµ´Ï´Ù.
+        // ì´ë¯¸ ì‹¤í–‰ ì¤‘ì¸ ìˆ¨ê¸°ê¸° ì½”ë£¨í‹´ì´ ìˆë‹¤ë©´ ì¤‘ì§€ì‹œí‚µë‹ˆë‹¤.
         if (hideHpBarCoroutine != null)
             StopCoroutine(hideHpBarCoroutine);
 
-        // »õ·Î¿î ¼û±â±â ÄÚ·çÆ¾À» ½ÃÀÛÇÕ´Ï´Ù.
+        // ìƒˆë¡œìš´ ìˆ¨ê¸°ê¸° ì½”ë£¨í‹´ì„ ì‹œì‘í•©ë‹ˆë‹¤.
         hideHpBarCoroutine = StartCoroutine(HideHpBarAfterDelay());
     }
 

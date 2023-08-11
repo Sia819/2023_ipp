@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     private Player player;
     private LineRenderer lineRenderer;
     private bool isFiring;
-    private bool isFiringCanAttackable;     // ·¹ÀÌÀú ¹ß»ı ½ÃÁ¡ ÇÑ¹ø ¸¸ °ø°İÇÏ¿©, ¾÷µ¥ÀÌÆ® ¹®¿¡¼­ Áö¼ÓÀû µ¥¹ÌÁö¸¦ ÀÔÈ÷´Â ¹®Á¦¸¦ ¹æÁö
+    private bool isFiringCanAttackable;     // ë ˆì´ì € ë°œìƒ ì‹œì  í•œë²ˆ ë§Œ ê³µê²©í•˜ì—¬, ì—…ë°ì´íŠ¸ ë¬¸ì—ì„œ ì§€ì†ì  ë°ë¯¸ì§€ë¥¼ ì…íˆëŠ” ë¬¸ì œë¥¼ ë°©ì§€
     private readonly WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
     private readonly WaitForSeconds fireRateDuration = new WaitForSeconds(0.2f);
 
@@ -28,28 +28,28 @@ public class PlayerAttack : MonoBehaviour
     {
         if (player.IsAlive == false) return;
 
-        /////////////// ·¹ÀÌÀú Æ®·¹ÀÏ °è»ê ///////////////
+        /////////////// ë ˆì´ì € íŠ¸ë ˆì¼ ê³„ì‚° ///////////////
         if (lineRenderer.enabled)
         {
-            // ÃÑ±¸ÀÇ ½ÃÀÛ°ú ³¡À» ±âÁØÀ¸·Î ¹æÇâ °ª¸¸ °¡Á®¿Í ray¸¦ »ı¼º
+            // ì´êµ¬ì˜ ì‹œì‘ê³¼ ëì„ ê¸°ì¤€ìœ¼ë¡œ ë°©í–¥ ê°’ë§Œ ê°€ì ¸ì™€ rayë¥¼ ìƒì„±
             Vector3 direction = (gunEnd.position - gunStart.position);
             Ray ray = new Ray(gunEnd.position, direction);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100f))
-            {// Ãæµ¹ÇÑ ¿µ¿ª±îÁö¸¸ ±¤¼±À» ±×¸®µµ·Ï ¶óÀÎ ·»´õ·¯ ¼³Á¤
+            {// ì¶©ëŒí•œ ì˜ì—­ê¹Œì§€ë§Œ ê´‘ì„ ì„ ê·¸ë¦¬ë„ë¡ ë¼ì¸ ë Œë”ëŸ¬ ì„¤ì •
                 lineRenderer.SetPosition(0, ray.origin);
-                lineRenderer.SetPosition(1, hit.point); // Ãæµ¹ À§Ä¡
+                lineRenderer.SetPosition(1, hit.point); // ì¶©ëŒ ìœ„ì¹˜
 
                 if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
                 {
                     monster.CurrentHp -= player.Damage;
-                    isFiringCanAttackable = false;      // Áßº¹ °ø°İ ¹æÁö
+                    isFiringCanAttackable = false;      // ì¤‘ë³µ ê³µê²© ë°©ì§€
                     Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
                 }
             }
             else
-            {// Ãæµ¹ÇÏÁö ¾Ê¾ÒÀ¸¹Ç·Î ÃÖ´ë °Å¸®·Î ¼³Á¤
+            {// ì¶©ëŒí•˜ì§€ ì•Šì•˜ìœ¼ë¯€ë¡œ ìµœëŒ€ ê±°ë¦¬ë¡œ ì„¤ì •
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, ray.origin + ray.direction * 100);
             }
@@ -70,8 +70,8 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            isFiring = false; // ÄÚ·çÆ¾ÀÇ ¹İº¹À» Áß´ÜÇÕ´Ï´Ù
-            lineRenderer.enabled = false; // ·¹ÀÌÀú ¼û±â±â
+            isFiring = false; // ì½”ë£¨í‹´ì˜ ë°˜ë³µì„ ì¤‘ë‹¨í•©ë‹ˆë‹¤
+            lineRenderer.enabled = false; // ë ˆì´ì € ìˆ¨ê¸°ê¸°
         }
     }
 
@@ -79,18 +79,18 @@ public class PlayerAttack : MonoBehaviour
     {
         while (isFiring && player.IsAlive)
         {
-            // ·¹ÀÌÀú¿Í ºÒºûÀ» Ç¥½ÃÇÕ´Ï´Ù.
+            // ë ˆì´ì €ì™€ ë¶ˆë¹›ì„ í‘œì‹œí•©ë‹ˆë‹¤.
             lineRenderer.enabled = true;
             player.GunLight.SetActive(true);
             Instantiate(gunParticle.gameObject, player.GunFlareTransform)?.transform.SetParent(this.transform);
             yield return firingDuration;
 
-            // ·¹ÀÌÀú¸¦ °¨Ãä´Ï´Ù.
+            // ë ˆì´ì €ë¥¼ ê°ì¶¥ë‹ˆë‹¤.
             lineRenderer.enabled = false;
             player.GunLight.SetActive(false);
             yield return fireRateDuration;
 
-            isFiringCanAttackable = true; // Áßº¹°ø°İ ¹æÁö
+            isFiringCanAttackable = true; // ì¤‘ë³µê³µê²© ë°©ì§€
         }
     }
 }
