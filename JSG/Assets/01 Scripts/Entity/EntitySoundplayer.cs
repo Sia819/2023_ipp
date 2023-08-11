@@ -25,7 +25,7 @@ public class EntitySoundplayer : MonoBehaviour
             entitySound = this.gameObject.AddComponent<AudioSource>();
             entitySound.playOnAwake = false;
             // entitySound.clip의 default clip 초기화
-            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);    
+            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);
 
             if (hertClip != null)
             {
@@ -38,25 +38,26 @@ public class EntitySoundplayer : MonoBehaviour
         }
 
         // 입이 아닌 다른곳에서 소리가 나는경우 동시에 소리가 재생될 수 있도록 합니다.
-        if (deathClip != null)
+        if (attackClip != null)
         {
             effectSound = this.gameObject.AddComponent<AudioSource>();
             effectSound.playOnAwake = false;
             // entitySound.clip을 default clip 초기화
-            effectSound.clip = (deathClip != null ? deathClip : entitySound.clip);
+            effectSound.clip = (attackClip != null ? attackClip : entitySound.clip);
+            entity.OnAttacked += OnAttackSoundPlay;
         }
     }
 
     private void OnHertSoundPlay(object sender, HpChangedEventArgs args)
     {
         // 체력이 감소할 때만 재생합니다.
-        if (args.Increased == false)
-        {
-            if (entitySound == null || hertClip == null) return;
+        if (args.Increased == true) return;
+        if (entitySound == null || hertClip == null) return;
+        if (args.CurrentHp <= 0) return;
 
-            entitySound.clip = hertClip;
-            entitySound.Play();
-        }
+        entitySound.clip = hertClip;
+        entitySound.Play();
+
     }
 
     private void OnDeathSoundPlay(object sender, EventArgs args)

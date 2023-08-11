@@ -4181,12 +4181,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 216353658137245754, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 806501442687091974, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4039463081230463931, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
+      propertyPath: deathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
     - target: {fileID: 6762744929058676194, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4230,6 +4234,10 @@ PrefabInstance:
     - target: {fileID: 6904573568695049667, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777794706844955557, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
+      propertyPath: <MaxHp>k__BackingField
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

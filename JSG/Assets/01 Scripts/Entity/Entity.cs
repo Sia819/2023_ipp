@@ -93,6 +93,8 @@ public abstract class Entity : MonoBehaviour
             if (this.currentHp == value) return;
             if (value < 0 && this.currentHp == 0) return;
 
+            bool increased = (currentHp < value) ? true : false;
+
             if (value > 0)
                 this.currentHp = value;
             else
@@ -100,8 +102,8 @@ public abstract class Entity : MonoBehaviour
                 this.currentHp = 0f;
                 OnDeath?.Invoke(this, EventArgs.Empty);
             }
-
-            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp));
+            
+            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp, increased));
         }
     }
 
