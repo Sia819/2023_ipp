@@ -24,8 +24,8 @@ public class EntitySoundplayer : MonoBehaviour
         {
             entitySound = this.gameObject.AddComponent<AudioSource>();
             entitySound.playOnAwake = false;
-
-            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);    // entitySound.clip을 초기화
+            // entitySound.clip의 default clip 초기화
+            entitySound.clip = (hertClip != null ? hertClip : entitySound.clip);    
 
             if (hertClip != null)
             {
@@ -42,16 +42,21 @@ public class EntitySoundplayer : MonoBehaviour
         {
             effectSound = this.gameObject.AddComponent<AudioSource>();
             effectSound.playOnAwake = false;
-            effectSound.clip = (deathClip != null ? deathClip : entitySound.clip);  // entitySound.clip을 초기화
+            // entitySound.clip을 default clip 초기화
+            effectSound.clip = (deathClip != null ? deathClip : entitySound.clip);
         }
     }
 
-    private void OnHertSoundPlay(object sender, EventArgs args)
+    private void OnHertSoundPlay(object sender, HpChangedEventArgs args)
     {
-        if (entitySound == null || hertClip == null) return;
-        
-        entitySound.clip = hertClip;
-        entitySound.Play();
+        // 체력이 감소할 때만 재생합니다.
+        if (args.Increased == false)
+        {
+            if (entitySound == null || hertClip == null) return;
+
+            entitySound.clip = hertClip;
+            entitySound.Play();
+        }
     }
 
     private void OnDeathSoundPlay(object sender, EventArgs args)

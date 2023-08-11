@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Entity;
 
 public class MainUIManager : Singleton<MainUIManager>
 {
@@ -32,7 +31,7 @@ public class MainUIManager : Singleton<MainUIManager>
         playerHpPoint.text = $"{player.CurrentHp}/{player.MaxHp}";
 
         // 게임 초기화 버튼을 눌렀을 때 동작
-        restartButton.onClick.AddListener(OnGameResetted);
+        restartButton.onClick.AddListener(GameRestarted);
 
         // 버튼 하이라이팅 동작 오작동 개선, mainUI Canvas에 Focus가 되어있지 않은 경우 재시작 버튼의 하이라이팅이 활성화 되지 않음.
         // 따라서 버튼의 위에 마우스가 오버될 때 캔버스가 포커스 되도록 함.
@@ -60,9 +59,9 @@ public class MainUIManager : Singleton<MainUIManager>
         uiAnimator.SetTrigger("Death");
     }
 
-    private void OnGameResetted()
+    private void GameRestarted()
     {
         uiAnimator.SetTrigger("Restart");
-        GameManager.Instance.GameReset();
+        GameManager.Instance.GameRestart();
     }
 }

@@ -12,7 +12,7 @@ public class Player : Entity
     {
         this.OnDeath += Death;
 
-        GameManager.Instance.OnGameResetted += OnResetted;
+        GameManager.Instance.OnGameRestarted += PlayerReset;
     }
 
     // 플레이어가 죽은 경우
@@ -21,7 +21,7 @@ public class Player : Entity
         GameManager.Instance.IsPlaying = false;
     }
 
-    private void OnResetted()
+    private void PlayerReset(object sender, EventArgs args)
     {
         this.transform.position = Vector3.zero;
         this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);

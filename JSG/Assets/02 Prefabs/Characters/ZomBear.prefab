@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 5803316476356741992}
   - component: {fileID: 320240605703433222}
   - component: {fileID: 3652855360740237671}
+  - component: {fileID: 1686997589403785630}
   - component: {fileID: 8653090189717578889}
   - component: {fileID: 1987098053276667676}
   - component: {fileID: 6535090226125158317}
@@ -1208,6 +1209,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1686997589403785630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216155760554707785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f56ec2f9c633e4fbc9c8f7edb0a9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hertClip: {fileID: 8300000, guid: 1d4840678e677424b8921716c72397ea, type: 3}
+  deathClip: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
+  attackClip: {fileID: 0}
 --- !u!114 &8653090189717578889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// Player 객체가 마우스 클릭에 따라 공격이 가능하도록 합니다.
+/// </summary>
 [RequireComponent(typeof(Player))]
 public class PlayerAttack : MonoBehaviour
 {
@@ -12,40 +17,39 @@ public class PlayerAttack : MonoBehaviour
 
     private Player player;
     private LineRenderer lineRenderer;
-    private bool isFiring;
-    private bool isFiringCanAttackable;     // 레이저 발생 시점 한번 만 공격하여, 업데이트 문에서 지속적 데미지를 입히는 문제를 방지
-    private readonly WaitForSeconds firingDuration = new WaitForSeconds(0.05f);
-    private readonly WaitForSeconds fireRateDuration = new WaitForSeconds(0.2f);
+    private float attackLate = 0.5f;        // 공격속도
+    private float attackCooldown = 0.0f;    // 시간 저장변수
 
     void Awake()
     {
         player = GetComponent<Player>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+        player.OnAttacked += GiveDamage;
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        if (player.IsAlive == false) return;
+        Entity attackTarget = null;
+        Vector3? hitPoint = null;
 
-        /////////////// 레이저 트레일 계산 ///////////////
-        if (lineRenderer.enabled)
+        /////////////// 레이, 라인렌더러 실시간 변경 연산 ///////////////
+        if (player.IsAlive == true)
         {
             // 총구의 시작과 끝을 기준으로 방향 값만 가져와 ray를 생성
-            Vector3 direction = (gunEnd.position - gunStart.position);
+            Vector3 direction = (gunEnd.position - gunStart.position).normalized;
             Ray ray = new Ray(gunEnd.position, direction);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {// 충돌한 영역까지만 광선을 그리도록 라인 렌더러 설정
                 lineRenderer.SetPosition(0, ray.origin);
                 lineRenderer.SetPosition(1, hit.point); // 충돌 위치
 
-                if (isFiringCanAttackable && hit.collider.TryGetComponent<Monster>(out Monster monster))
+                // 몬스터에 닿은 경우 attackTarget 에 저장시킵니다. (옵저버 패턴에서 사용)
+                if (hit.collider.TryGetComponent<Monster>(out Monster monster))
                 {
-                    monster.CurrentHp -= player.Damage;
-                    isFiringCanAttackable = false;      // 중복 공격 방지
-                    Instantiate(hitParticle.gameObject, hit.point, player.transform.rotation * Quaternion.Euler(0, 180, 0));
+                    attackTarget = monster;
+                    hitPoint = hit.point;
                 }
             }
             else
@@ -54,43 +58,33 @@ public class PlayerAttack : MonoBehaviour
                 lineRenderer.SetPosition(1, ray.origin + ray.direction * 100);
             }
         }
-    }
 
-    void Update()
-    {
-        if (player.IsAlive == false) return;
-
-        if (Input.GetMouseButton(0))
+        ///////////////// 공격, 쿨타임마다 공격가능 ////////////////
+        if (attackCooldown < 0.0f)
         {
-            if (!isFiring)
-            {
-                isFiring = true;
-                StartCoroutine(FireLaser());
-            }
+            // 왼쪽 마우스가 눌려진 상태에서만 공격할 수 있습니다.
+            if (Input.GetMouseButton(0) == false) return;
+
+            // 플레이어가 생존 시 공격 후 쿨다운, 생존하지 않으면 쿨다운 적용
+            if (player.IsAlive == true)
+                player.ExcuteAttack(attackTarget, player.Damage, hitPoint); // 공격
+
+            // 쿨다운을 적용시킵니다.
+            attackCooldown = attackLate;
         }
         else
-        {
-            isFiring = false; // 코루틴의 반복을 중단합니다
-            lineRenderer.enabled = false; // 레이저 숨기기
-        }
+            attackCooldown -= Time.deltaTime;
     }
 
-    IEnumerator FireLaser()
+    /// <summary> 타겟에게 실질적으로 데미지를 입힙니다. </summary>
+    private void GiveDamage(object sender, AttackEventArgs args)
     {
-        while (isFiring && player.IsAlive)
+        Instantiate(gunParticle.gameObject, player.GunFlareTransform)?.transform.SetParent(this.transform);
+
+        if (args.TargetEntity != null)
         {
-            // 레이저와 불빛을 표시합니다.
-            lineRenderer.enabled = true;
-            player.GunLight.SetActive(true);
-            Instantiate(gunParticle.gameObject, player.GunFlareTransform)?.transform.SetParent(this.transform);
-            yield return firingDuration;
-
-            // 레이저를 감춥니다.
-            lineRenderer.enabled = false;
-            player.GunLight.SetActive(false);
-            yield return fireRateDuration;
-
-            isFiringCanAttackable = true; // 중복공격 방지
+            args.TargetEntity.CurrentHp -= args.Damage;
+            Instantiate(hitParticle.gameObject, args.HitPoint.Value, player.transform.rotation * Quaternion.Euler(0, 180, 0));
         }
     }
 }

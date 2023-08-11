@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static Entity;
 
 [RequireComponent(typeof(Monster))]
 public class MonsterUIManager : MonoBehaviour

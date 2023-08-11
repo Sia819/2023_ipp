@@ -1,14 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region CustomEventArgs Class
+public class GameScoreChangedEventArgs : EventArgs
+{
+    public int GameScore { get; }
+
+    public GameScoreChangedEventArgs(int gameScore)
+    {
+        GameScore = gameScore;
+    }
+}
+#endregion
+
+
 public class GameManager : Singleton<GameManager>
 {
-    public delegate void GameScoreChanged(int score);
-    public event GameScoreChanged OnGameScoreChanged;
+    public delegate void GameScoreChangedHandler(int gameScore);
+    public event GameScoreChangedHandler OnGameScoreChanged;
 
-    public delegate void GameResetted();
-    public event GameResetted OnGameResetted;
+    public delegate void GameRestarted(object sender, EventArgs args);
+    public event GameRestarted OnGameRestarted;
 
     [field: SerializeField] public Player Player { get; private set; }
 
@@ -33,10 +47,10 @@ public class GameManager : Singleton<GameManager>
         IsPlaying = true;
     }
 
-    public void GameReset()
+    public void GameRestart()
     {
         IsPlaying = true;
         GameScore = 0;
-        OnGameResetted?.Invoke();
+        OnGameRestarted?.Invoke(this, EventArgs.Empty);
     }
 }

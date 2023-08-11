@@ -784,6 +784,7 @@ GameObject:
   - component: {fileID: 1246348564661104859}
   - component: {fileID: 7174744779402112430}
   - component: {fileID: 968221830627749984}
+  - component: {fileID: 9085227430092414871}
   - component: {fileID: 5151176552964015679}
   - component: {fileID: -496374074332511862}
   - component: {fileID: 429110859110740546}
@@ -940,6 +941,21 @@ MonoBehaviour:
   <MaxHp>k__BackingField: 60
   <Damage>k__BackingField: 30
   ScorePoint: 50
+--- !u!114 &9085227430092414871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482782861598802160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f56ec2f9c633e4fbc9c8f7edb0a9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hertClip: {fileID: 8300000, guid: 02e6208ec76314158a9f548f51fe9f11, type: 3}
+  deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  attackClip: {fileID: 0}
 --- !u!114 &5151176552964015679
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,7 +17,7 @@ public class MonsterSpawn : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.OnGameResetted += OnResetted;
+        GameManager.Instance.OnGameRestarted += ResetMonster;
 
         if (GameManager.Instance.IsPlaying)
         {
@@ -26,7 +26,7 @@ public class MonsterSpawn : MonoBehaviour
     }
 
     // 게임이 초기화 되었을 때, 모든 몬스터를 삭제합니다.
-    private void OnResetted()
+    private void ResetMonster(object sender, EventArgs args)
     {
         foreach (Transform child in transform)
         {
@@ -36,7 +36,7 @@ public class MonsterSpawn : MonoBehaviour
     }
 
     /// <summary> 몬스터를 생성합니다. </summary>
-    IEnumerator Spawn()
+    private IEnumerator Spawn()
     {
         while (GameManager.Instance.IsPlaying)
         {
@@ -47,7 +47,7 @@ public class MonsterSpawn : MonoBehaviour
             }
 
             Vector3 spawnPoint;
-            int spawnType = Random.Range(0, 20);    // 랜덤 값으로 어디에 어떤 몬스터가 스폰될 지 결정됩니다.
+            int spawnType = UnityEngine.Random.Range(0, 20);    // 랜덤 값으로 어디에 어떤 몬스터가 스폰될 지 결정됩니다.
 
             if (spawnType < 6) // 쥐구멍에서 몬스터 생성
             {
@@ -71,15 +71,15 @@ public class MonsterSpawn : MonoBehaviour
 
     /// <summary> 몬스터를 스폰할 지점을 생성합니다. </summary>
     /// <returns> 스폰가능한 영역의 좌표를 리턴합니다. </returns>
-    Vector3 GenRandomPoint(BoxCollider spawnArea, bool considerCamera = false)
+    private Vector3 GenRandomPoint(BoxCollider spawnArea, bool considerCamera = false)
     {
         Vector3 spawnPoint;
 
         do
         {
             // 로컬 공간에서 랜덤한 점을 생성합니다.
-            float x = Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2);
-            float z = Random.Range(-spawnArea.size.z / 2, spawnArea.size.z / 2);
+            float x = UnityEngine.Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2);
+            float z = UnityEngine.Random.Range(-spawnArea.size.z / 2, spawnArea.size.z / 2);
             Vector3 localPoint = new Vector3(x, 0, z);
 
             // 로컬 공간에서의 점을 월드 공간으로 변환합니다.
@@ -92,7 +92,7 @@ public class MonsterSpawn : MonoBehaviour
 
     /// <summary> 해당 위치에 스폰 가능한지 장애물 여부를 체크합니다. </summary>
     /// <returns> true = 스폰 가능한 영역입니다. false = 스폰 불가능한 영역입니다. </returns>
-    bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea)
+    private bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea)
     {
         // point 위치에서 아래로 레이를 발사합니다.
         Ray ray = new Ray(point + Vector3.up * 100, Vector3.down);
@@ -113,7 +113,7 @@ public class MonsterSpawn : MonoBehaviour
 
     /// <summary> 해당 위치가 카메라에 보여지는 여부를 체크합니다. </summary>
     /// <returns> true = 위치는 카메라에 보여집니다. false = 위치는 카메라에 보여지지 않습니다. </returns>
-    bool IsPointInCameraView(Vector3 point, bool considerCamera)
+    private bool IsPointInCameraView(Vector3 point, bool considerCamera)
     {
         if (considerCamera == false)
             return false;
