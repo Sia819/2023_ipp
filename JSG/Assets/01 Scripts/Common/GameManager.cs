@@ -37,7 +37,6 @@ public class GameManager : Singleton<GameManager>
     public delegate void StageStarted(object sender, EventArgs args);
     public event StageStarted OnStageStarted;
 
-
     [field: SerializeField] public Player Player { get; private set; }
 
     public bool IsPlaying { get; set; }
@@ -63,7 +62,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         IsPlaying = true;
-        OnGameStarted?.Invoke(this, EventArgs.Empty);
+        OnGameStarted.Invoke(this, EventArgs.Empty);
     }
 
     public void GameRestart()

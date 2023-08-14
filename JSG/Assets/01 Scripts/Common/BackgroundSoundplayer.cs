@@ -9,25 +9,24 @@ public class BackgroundSoundplayer : MonoBehaviour
 
     private AudioSource backgroundSound;
 
-    void Start()
+    void Awake()
     {
+        // 게임 (시작&종료 시) 배경음악 (재생&정지)
+        GameManager.Instance.OnGameStarted += GameStart;
+        GameManager.Instance.Player.OnDeath += GameOver;
+
         backgroundSound = this.gameObject.AddComponent<AudioSource>();
         backgroundSound.playOnAwake = false;
         backgroundSound.loop = true;
         backgroundSound.clip = backgroundClip;
-
-        // 게임 시작시 배경음악 재생
-        GameManager.Instance.OnGameStarted += GameStart;
-        // 게임 종료시 배경음악 정지
-        GameManager.Instance.Player.OnDeath += GameOver;
     }
 
-    void GameStart(object sender, EventArgs args)
+    private void GameStart(object sender, EventArgs args)
     {
         backgroundSound.Play();
     }
 
-    void GameOver(object sender, EventArgs args)
+    private void GameOver(object sender, EventArgs args)
     {
         backgroundSound.Stop();
     }

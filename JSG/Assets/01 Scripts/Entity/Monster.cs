@@ -18,7 +18,7 @@ public class Monster : Entity
     private NavMeshAgent agent;
     private readonly WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
-    private void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();

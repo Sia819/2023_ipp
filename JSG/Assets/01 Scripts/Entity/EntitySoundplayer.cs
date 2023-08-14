@@ -15,7 +15,7 @@ public class EntitySoundplayer : MonoBehaviour
     private AudioSource entitySound;
     private AudioSource effectSound;
 
-    void Start()
+    void Awake()
     {
         entity = GetComponent<Entity>();
 

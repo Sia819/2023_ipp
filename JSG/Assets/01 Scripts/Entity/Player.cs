@@ -8,10 +8,9 @@ public class Player : Entity
     [field: SerializeField] public Transform GunFlareTransform { get; private set; }
     [field: SerializeField] public GameObject GunLight { get; private set; }
 
-    void Start()
+    void Awake()
     {
         this.OnDeath += Death;
-
         GameManager.Instance.OnGameStarted += PlayerReset;
     }
 

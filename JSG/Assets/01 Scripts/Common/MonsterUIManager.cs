@@ -13,13 +13,15 @@ public class MonsterUIManager : MonoBehaviour
     private Camera mainCamera;
     private Coroutine hideHpBarCoroutine;
 
+    void Awake()
+    {
+        monster = GetComponent<Monster>();
+        monster.OnHpChanged += HpBarUpdate;
+    }
 
     void Start()
     {
-        monster = GetComponent<Monster>();
         mainCamera = Camera.main;
-
-        monster.OnHpChanged += HpBarUpdate;
 
         monsterHpBar.maxValue = monster.MaxHp;
         monsterHpBar.value = monster.CurrentHp;

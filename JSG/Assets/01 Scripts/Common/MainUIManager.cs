@@ -21,7 +21,7 @@ public class MainUIManager : Singleton<MainUIManager>
     private bool smoothlyChangeScore = true;
 
     // 점수를 부드럽게 증가시키기 위한 변수
-    private int displayScore;   // 
+    private int displayScore;
     private int currentScore;
     private float transitionSpeed = 300f; // 0.5초에 점수을 올리기 위한 속도
 
@@ -33,13 +33,13 @@ public class MainUIManager : Singleton<MainUIManager>
         player.OnHpChanged += HpUpdate;
         player.OnDeath += DeathUI;
 
-        // 점수 업데이트 이벤트 함수 등록
-        GameManager.Instance.OnGameScoreChanged += gameScoreChange;
-        GameManager.Instance.OnStageStarted += StageStarted;
-
         // 초기 체력값 설정
         playerHpBar.value = player.CurrentHp;
         playerHpPoint.text = $"{player.CurrentHp}/{player.MaxHp}";
+
+        // 점수 업데이트 이벤트 함수 등록
+        GameManager.Instance.OnGameScoreChanged += gameScoreChange;
+        GameManager.Instance.OnStageStarted += StageStarted;
 
         // 게임 초기화 버튼을 눌렀을 때 동작
         restartButton.onClick.AddListener(GameRestarted);
@@ -79,7 +79,6 @@ public class MainUIManager : Singleton<MainUIManager>
         int scoreDifference = Math.Abs(currentScore - displayScore);
         if (scoreDifference > 200) transitionSpeed = Math.Abs(currentScore - displayScore);
         else transitionSpeed = 300;
-
     }
 
     private void HpUpdate(object sender, HpChangedEventArgs args)
