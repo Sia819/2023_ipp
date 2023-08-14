@@ -14,8 +14,11 @@ public class BackgroundSoundplayer : MonoBehaviour
         backgroundSound = this.gameObject.AddComponent<AudioSource>();
         backgroundSound.playOnAwake = false;
         backgroundSound.loop = true;
+        backgroundSound.clip = backgroundClip;
 
-        // 게임이 종료되었을 때, 배경음악을 멈춥니다.
+        // 게임 시작시 배경음악 재생
+        GameManager.Instance.OnGameStarted += GameStart;
+        // 게임 종료시 배경음악 정지
         GameManager.Instance.Player.OnDeath += GameOver;
     }
 

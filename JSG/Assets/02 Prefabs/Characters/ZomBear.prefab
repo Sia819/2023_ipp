@@ -1196,7 +1196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHp>k__BackingField: 160
   <Damage>k__BackingField: 30
-  ScorePoint: 100
+  ScorePoint: 200
+  boundCollider: {fileID: 7822907141969764982}
+  attackCollider: {fileID: 2213172137687043181}
 --- !u!114 &3652855360740237671
 MonoBehaviour:
   m_ObjectHideFlags: 0

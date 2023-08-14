@@ -12,7 +12,7 @@ public class Player : Entity
     {
         this.OnDeath += Death;
 
-        GameManager.Instance.OnGameRestarted += PlayerReset;
+        GameManager.Instance.OnGameStarted += PlayerReset;
     }
 
     // 플레이어가 죽은 경우

@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.IsAlive == false) return;
+         
 
         /////////////// Player movement ///////////////
 
@@ -52,13 +53,20 @@ public class PlayerMovement : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         // 움직임 속성 값 업데이트
-        if (!(moveHorizontal == 0 && moveVertical == 0))
-            player.IsMoving = true;
-        else if (moveHorizontal == 0 && moveVertical == 0)
+        if (moveHorizontal == 0 && moveVertical == 0)
             player.IsMoving = false;
+        else if (!(moveHorizontal == 0 && moveVertical == 0))
+        {
+            player.IsMoving = true;
+            // 첫 움직임이 시작되었으므로 스테이지를 시작합니다.
+            if (GameManager.Instance.IsStageStarted == false)
+                GameManager.Instance.StateStart();
+        }
 
         // 물리 움직임 구현
         Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // Y축 보정값 
         rb.MovePosition(transform.position + (destination * speed * Time.fixedDeltaTime));
     }
+
+
 }

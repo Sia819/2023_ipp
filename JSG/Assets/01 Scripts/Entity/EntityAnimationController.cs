@@ -18,7 +18,7 @@ public class EntityAnimationController : MonoBehaviour
         entity.OnMoveStateChanged += MovingAnimation;
         entity.OnDeath += DeathAnimation;
         entity.OnAttacked += AttackAnimation;
-        GameManager.Instance.OnGameRestarted += GameRestarted;
+        GameManager.Instance.OnGameStarted += GameRestarted;
     }
 
     private void OnDestroy()
@@ -26,7 +26,7 @@ public class EntityAnimationController : MonoBehaviour
         entity.OnMoveStateChanged -= MovingAnimation;
         entity.OnDeath -= DeathAnimation;
         entity.OnAttacked -= AttackAnimation;
-        GameManager.Instance.OnGameRestarted -= GameRestarted;
+        GameManager.Instance.OnGameStarted -= GameRestarted;
     }
 
     private void MovingAnimation(object sender, MoveStateEventArgs args)

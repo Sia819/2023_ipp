@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static GameManager;
 
 public class MainUIManager : Singleton<MainUIManager>
 {
@@ -14,6 +15,15 @@ public class MainUIManager : Singleton<MainUIManager>
     [SerializeField] private TMP_Text gameScore;
     [SerializeField] private Animator uiAnimator;
     [SerializeField] private Button restartButton;
+    [SerializeField] private GameObject startGuide;
+
+    // 점수를 부드럽게 변경시키도록 합니다.
+    private bool smoothlyChangeScore = true;
+
+    // 점수를 부드럽게 증가시키기 위한 변수
+    private int displayScore;   // 
+    private int currentScore;
+    private float transitionSpeed = 300f; // 0.5초에 점수을 올리기 위한 속도
 
     void Start()
     {
@@ -25,6 +35,7 @@ public class MainUIManager : Singleton<MainUIManager>
 
         // 점수 업데이트 이벤트 함수 등록
         GameManager.Instance.OnGameScoreChanged += gameScoreChange;
+        GameManager.Instance.OnStageStarted += StageStarted;
 
         // 초기 체력값 설정
         playerHpBar.value = player.CurrentHp;
@@ -42,9 +53,33 @@ public class MainUIManager : Singleton<MainUIManager>
         eventTrigger.triggers.Add(entry);
     }
 
-    private void gameScoreChange(int score)
+    private void Update()
     {
-        gameScore.text = $"SCORE: {score}";
+        if (smoothlyChangeScore && Math.Abs(currentScore - displayScore) != 0)
+        {
+            // deltaTime을 고려하여 점수 증가
+            int direction = currentScore > displayScore ? 1 : -1;
+            displayScore += (int)(direction * transitionSpeed * Time.deltaTime);
+
+            if (direction == 1 && displayScore > currentScore || direction == -1 && displayScore < currentScore)
+                displayScore = currentScore;
+        }
+        else
+            displayScore = currentScore;
+
+        gameScore.text = $"SCORE: {displayScore}";
+    }
+
+    private void gameScoreChange(object sender, GameScoreChangedEventArgs args)
+    {
+        currentScore = args.GameScore;
+        smoothlyChangeScore = args.SmoothlyChange;
+
+        // 점수의 크기에 따라 부드럽게 상승하는 시간 계산
+        int scoreDifference = Math.Abs(currentScore - displayScore);
+        if (scoreDifference > 200) transitionSpeed = Math.Abs(currentScore - displayScore);
+        else transitionSpeed = 300;
+
     }
 
     private void HpUpdate(object sender, HpChangedEventArgs args)
@@ -63,5 +98,12 @@ public class MainUIManager : Singleton<MainUIManager>
     {
         uiAnimator.SetTrigger("Restart");
         GameManager.Instance.GameRestart();
+        startGuide.gameObject.SetActive(true);
+    }
+
+    private void StageStarted(object sender, EventArgs args)
+    {
+        GameManager.Instance.GameScoreSmoothlyChange = true;
+        startGuide.gameObject.SetActive(false);
     }
 }

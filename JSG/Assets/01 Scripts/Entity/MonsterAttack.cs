@@ -10,7 +10,6 @@ public class MonsterAttack : MonoBehaviour
 
     private Monster monster;
     private readonly WaitForSeconds attackTime = new WaitForSeconds(1f);
-    private Coroutine attackCoroutine;
     private bool continuousAttack;
 
     void Awake()
@@ -23,7 +22,7 @@ public class MonsterAttack : MonoBehaviour
         if (monster.IsAlive && other.CompareTag("Player"))
         {
             continuousAttack = true;
-            attackCoroutine = StartCoroutine(Attack(other));
+            StartCoroutine(Attack(other));
         }
     }
 

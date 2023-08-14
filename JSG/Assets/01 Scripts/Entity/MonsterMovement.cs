@@ -15,7 +15,7 @@ public class MonsterMovement : MonoBehaviour
     void Start()
     {
         monster = GetComponent<Monster>();
-        navAgent = GetComponent<NavMeshAgent>(); // Nav Mesh Agent 컴포넌트 가져오기
+        navAgent = GetComponent<NavMeshAgent>();
         navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // 장애물 회피 품질 설정
         player = GameManager.Instance.Player;
         StartCoroutine(Move());
@@ -28,6 +28,7 @@ public class MonsterMovement : MonoBehaviour
             navAgent.SetDestination(player.transform.position); // 플레이어 위치로 목적지 설정
             yield return pathUpdateRate;
         }
-        this.navAgent.isStopped = true;
+        if (navAgent.enabled)
+            this.navAgent.isStopped = true;
     }
 }
