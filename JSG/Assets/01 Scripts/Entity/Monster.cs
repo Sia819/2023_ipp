@@ -18,8 +18,9 @@ public class Monster : Entity
     private NavMeshAgent agent;
     private readonly WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 

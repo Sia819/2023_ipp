@@ -121,7 +121,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         currentHp = MaxHp;
     }
