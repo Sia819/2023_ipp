@@ -28,7 +28,7 @@ public class Monster : Entity
 
     private void OnDestroy()
     {
-        GameManager.Instance.MonsterCount = 0;
+        GameManager.Instance.MonsterCount--;
         this.OnDeath -= DeathAction;
     }
 

@@ -2179,6 +2179,7 @@ MonoBehaviour:
   gunEnd: {fileID: 2478348227804668513}
   gunParticle: {fileID: 19800000, guid: 0bd11145ced4539458f937fc4609544a, type: 3}
   hitParticle: {fileID: 19800000, guid: ef39ae7291c751249b296f00bf6fb042, type: 3}
+  attackLate: 0.33
 --- !u!114 &4039463081230463931
 MonoBehaviour:
   m_ObjectHideFlags: 0

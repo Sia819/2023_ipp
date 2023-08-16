@@ -12,11 +12,13 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] private GameObject mobZomBunny;
     [SerializeField] private GameObject mobHellephant;
     [SerializeField] private int spawnMax = 50;
+    [SerializeField] private float spawnRate = 1.2f;
 
-    private WaitForSeconds spawnTime = new WaitForSeconds(1.2f);
+    private WaitForSeconds spawnTime;
 
     void Start()
     {
+        spawnTime = new WaitForSeconds(spawnRate);
         GameManager.Instance.OnGameStarted += ResetMonster;
         GameManager.Instance.OnStageStarted += SpawnMonster;
     }
@@ -61,7 +63,7 @@ public class MonsterSpawn : MonoBehaviour
             {
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
-                rand = RandomRatio(2, 4, 6);
+                rand = RandomRatio(2, 6, 8);
                 if (rand == 1) Instantiate(mobHellephant, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else if (rand == 2) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
                 else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);

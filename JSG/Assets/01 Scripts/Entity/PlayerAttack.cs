@@ -14,10 +14,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform gunEnd;
     [SerializeField] private ParticleSystem gunParticle;
     [SerializeField] private ParticleSystem hitParticle;
+    [SerializeField] private float attackLate = 0.25f;        // 공격속도
 
     private Player player;
     private LineRenderer lineRenderer;
-    private float attackLate = 0.33f;        // 공격속도
+    
     private float attackCooldown = 0.0f;    // 시간 저장변수
 
     void Awake()

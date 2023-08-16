@@ -25,6 +25,8 @@ public class MonsterMovement : MonoBehaviour
     {
         while (GameManager.Instance.IsPlaying && monster.IsAlive)
         {
+            if (navAgent.enabled == false) { yield return pathUpdateRate; continue; }
+
             navAgent.SetDestination(player.transform.position); // 플레이어 위치로 목적지 설정
             yield return pathUpdateRate;
         }

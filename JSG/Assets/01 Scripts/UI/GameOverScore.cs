@@ -21,5 +21,4 @@ public class GameOverScore : MonoBehaviour
         GameManager.Instance.GameScoreSmoothlyChange = true;
         GameManager.Instance.GameScore = score;
     }
-
 }
