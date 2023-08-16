@@ -881,7 +881,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.7, z: 0.75}
+  m_Size: {x: 0.75, y: 1.7, z: 0.75}
   m_Center: {x: 0, y: 0.85, z: 0.1}
 --- !u!65 &1246348564661104859
 BoxCollider:
@@ -913,7 +913,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5482782861598802160}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.62
   m_Speed: 7
   m_Acceleration: 10
   avoidancePriority: 50

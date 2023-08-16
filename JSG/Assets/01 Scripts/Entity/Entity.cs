@@ -93,7 +93,7 @@ public abstract class Entity : MonoBehaviour
             if (this.currentHp == value) return;
             if (value < 0 && this.currentHp == 0) return;
 
-            bool increased = (currentHp < value) ? true : false;
+            bool increased = (currentHp < value);
 
             if (value > 0)
                 this.currentHp = value;

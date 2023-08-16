@@ -39,6 +39,7 @@ public class Monster : Entity
         StartCoroutine(DeathProcess());
     }
 
+    /// <summary> Monster가 죽었을 때 처리해야 할 작업 </summary>
     private IEnumerator DeathProcess()
     {
         yield return deathWaitTime;
@@ -46,7 +47,6 @@ public class Monster : Entity
         boundCollider.enabled = false;
         agent.enabled = false;
         rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // rigidbody의 Y축 고정을 풉니다.
-        
 
         yield return deathWaitTime;
         Destroy(this.gameObject);

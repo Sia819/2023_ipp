@@ -86,7 +86,7 @@ public class PlayerAttack : MonoBehaviour
     /// <summary> 타겟에게 실질적으로 데미지를 입힙니다. </summary>
     private void GiveDamage(object sender, AttackEventArgs args)
     {
-        Instantiate(gunParticle.gameObject, player.GunFlareTransform)?.transform.SetParent(gunEnd);
+        Instantiate(gunParticle.gameObject, player.GunFlareTransform).transform.SetParent(gunEnd);
 
         if (args.TargetEntity != null)
         {

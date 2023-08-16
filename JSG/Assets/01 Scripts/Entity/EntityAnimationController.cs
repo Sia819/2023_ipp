@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Entity class오브젝트의 애니메이션을 제어합니다.
+/// 특히 Move, Stop, Death, Attack 상태의 애니메이션을 제어합니다.
+/// </summary>
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Animator))]
 public class EntityAnimationController : MonoBehaviour
@@ -29,6 +33,7 @@ public class EntityAnimationController : MonoBehaviour
         GameManager.Instance.OnGameStarted -= GameRestarted;
     }
 
+    /// <summary> 걷는 애니메이션을 제생합니다. </summary>
     private void MovingAnimation(object sender, MoveStateEventArgs args)
     {
         if (args.IsMoving)
@@ -56,6 +61,4 @@ public class EntityAnimationController : MonoBehaviour
         animator?.SetBool("Death", false);
         animator?.SetTrigger("StopTrg");
     }
-
-
 }

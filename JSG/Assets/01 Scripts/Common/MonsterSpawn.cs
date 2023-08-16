@@ -56,17 +56,20 @@ public class MonsterSpawn : MonoBehaviour
                 spawnPoint = GenRandomPoint(spawnHole, false);
 
                 rand = RandomRatio(4, 6);
-                if (rand == 1) Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
-                else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                if (rand == 1) Instantiate(mobZomBunny, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
             }
             else // 바닥에서 몬스터 생성
             {
                 spawnPoint = GenRandomPoint(spawnFloor, true);
 
                 rand = RandomRatio(2, 6, 8);
-                if (rand == 1) Instantiate(mobHellephant, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
-                else if (rand == 2) Instantiate(mobZomBear, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
-                else Instantiate(mobZomBunny, spawnPoint, Quaternion.identity)?.transform.SetParent(this.transform);
+                if (rand == 1) Instantiate(mobHellephant, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                else if (rand == 2) Instantiate(mobZomBear, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                else
+                {
+                    Instantiate(mobZomBunny, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                }
             }
             GameManager.Instance.MonsterCount++;
             yield return spawnTime;
@@ -128,10 +131,9 @@ public class MonsterSpawn : MonoBehaviour
     {
         // point 위치에서 아래로 레이를 발사합니다.
         Ray ray = new Ray(point + Vector3.up * 100, Vector3.down);
-        RaycastHit hit;
 
         // 레이가 어떤 콜라이더와 부딛히는지 확인합니다.
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             // 레이가 부딛힌 콜라이더가 spawnArea와 같다면 true를 반환합니다.
             if (hit.collider == spawnArea)

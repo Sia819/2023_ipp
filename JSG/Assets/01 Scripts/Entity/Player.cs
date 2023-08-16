@@ -18,13 +18,12 @@ public sealed class Player : Entity
     // 플레이어가 죽은 경우
     private void Death(object sender, EventArgs args)
     {
-        GameManager.Instance.IsPlaying = false;
+        GameManager.Instance.GameSet();
     }
 
     private void PlayerReset(object sender, EventArgs args)
     {
-        this.transform.position = Vector3.zero;
-        this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        this.transform.SetPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, 180f, 0f));
         this.CurrentHp = MaxHp;
     }
 }

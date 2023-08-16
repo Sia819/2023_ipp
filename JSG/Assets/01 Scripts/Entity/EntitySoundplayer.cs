@@ -2,6 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Entity class의 Hert, Death, Attack 사운드를 제어합니다.
+/// 만약 사운드가 인스펙터에서 등록되지 않더라도 오류를 일으키지 않습니다.
+/// </summary>
 [RequireComponent(typeof(Entity))]
 public class EntitySoundplayer : MonoBehaviour
 {
@@ -48,6 +52,7 @@ public class EntitySoundplayer : MonoBehaviour
         }
     }
 
+    /// <summary> Entity가 다쳤을 때 사운드 재생 </summary>
     private void OnHertSoundPlay(object sender, HpChangedEventArgs args)
     {
         // 체력이 감소할 때만 재생합니다.
@@ -57,9 +62,9 @@ public class EntitySoundplayer : MonoBehaviour
 
         entitySound.clip = hertClip;
         entitySound.Play();
-
     }
 
+    /// <summary> Entity가 죽었을 때 사운드 재생 </summary>
     private void OnDeathSoundPlay(object sender, EventArgs args)
     {
         if (entitySound == null || deathClip == null) return;
@@ -68,6 +73,7 @@ public class EntitySoundplayer : MonoBehaviour
         entitySound.Play();
     }
 
+    /// <summary> Entity가 공격했을 때 사운드 재생 </summary>
     private void OnAttackSoundPlay(object sender, EventArgs args)
     {
         if (effectSound == null || attackClip == null) return;

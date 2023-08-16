@@ -569,6 +569,83 @@ MonoBehaviour:
   mobHellephant: {fileID: 879284815741700903, guid: b996127ebba9464468cee6497b65bec3, type: 3}
   spawnMax: 100
   spawnRate: 1
+--- !u!1001 &324207372
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 152817739081465, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246348564661104859, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977040194714502718, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977040194714502718, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977040194714502718, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482782861598802160, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_Name
+      value: ZomBunny
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970820872121036213, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff81002749589094cb13f8f1cbc1295c, type: 3}
 --- !u!1001 &347732631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5373,7 +5450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6595716, guid: 149d6dcc67e8d1240bbc0dd6ddf0c1bd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6599206, guid: 149d6dcc67e8d1240bbc0dd6ddf0c1bd, type: 3}
       propertyPath: m_Enabled
@@ -5758,6 +5835,14 @@ PrefabInstance:
       propertyPath: m_Lightmapping
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6029993955607007510, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029993955607007510, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
+      propertyPath: m_Center.z
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6531205434513662255, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_Lightmapping
       value: 4
@@ -5842,3 +5927,4 @@ SceneRoots:
   - {fileID: 1912030146}
   - {fileID: 4857838173739902635}
   - {fileID: 320865958}
+  - {fileID: 324207372}

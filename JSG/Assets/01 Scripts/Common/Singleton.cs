@@ -37,6 +37,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Debug.LogWarning($"{typeof(T).Name}가 하나 이상 존재합니다!");
         }
     }
-
-
 }
