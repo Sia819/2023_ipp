@@ -24,8 +24,8 @@ MonoBehaviour:
     pathIncludesFilters: []
     componentIgnoresFilters: []
     lookInScenes: 1
-    lookInAssets: 1
-    lookInProjectSettings: 1
+    lookInAssets: 0
+    lookInProjectSettings: 0
     scenesSelection: 2
     scanGameObjects: 1
     touchInactiveGameObjects: 1

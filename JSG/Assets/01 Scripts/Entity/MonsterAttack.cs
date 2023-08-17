@@ -22,7 +22,7 @@ public class MonsterAttack : MonoBehaviour
         if (monster.IsAlive && other.CompareTag("Player"))
         {
             continuousAttack = true;
-            StartCoroutine(Attack(other));
+            StartCoroutine(Attack());
         }
     }
 
@@ -34,7 +34,7 @@ public class MonsterAttack : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(Collider other)
+    IEnumerator Attack()
     {
         do
         {
