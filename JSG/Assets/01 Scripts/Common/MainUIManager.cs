@@ -38,7 +38,7 @@ public class MainUIManager : Singleton<MainUIManager>
         playerHpPoint.text = $"{player.CurrentHp}/{player.MaxHp}";
 
         // 점수 업데이트 이벤트 함수 등록
-        GameManager.Instance.OnGameScoreChanged += gameScoreChange;
+        GameManager.Instance.OnGameScoreChanged += GameScoreChange;
         GameManager.Instance.OnStageStarted += StageStarted;
 
         // 게임 초기화 버튼을 눌렀을 때 동작
@@ -70,7 +70,7 @@ public class MainUIManager : Singleton<MainUIManager>
         gameScore.text = $"SCORE: {displayScore}";
     }
 
-    private void gameScoreChange(object sender, GameScoreChangedEventArgs args)
+    private void GameScoreChange(object sender, GameScoreChangedEventArgs args)
     {
         currentScore = args.GameScore;
         smoothlyChangeScore = args.SmoothlyChange;
@@ -97,12 +97,12 @@ public class MainUIManager : Singleton<MainUIManager>
     {
         uiAnimator.SetTrigger("Restart");
         GameManager.Instance.GameRestart();
-        startGuide.gameObject.SetActive(true);
+        startGuide.SetActive(true);
     }
 
     private void StageStarted(object sender, EventArgs args)
     {
         GameManager.Instance.GameScoreSmoothlyChange = true;
-        startGuide.gameObject.SetActive(false);
+        startGuide.SetActive(false);
     }
 }

@@ -42,37 +42,41 @@ public class MonsterSpawn : MonoBehaviour
     {
         while (GameManager.Instance.IsPlaying)
         {
+            yield return spawnTime;
+
             if (spawnMax <= GameManager.Instance.MonsterCount)
             {
                 yield return spawnTime;
                 continue;
             }
 
-            Vector3 spawnPoint;
+            Vector3? spawnPoint;
             int rand = RandomRatio(3, 7);
 
             if (rand == 1) // 쥐구멍에서 몬스터 스폰
             {
-                spawnPoint = GenRandomPoint(spawnHole, false);
+                spawnPoint = spawnHole.transform.position;
+                if (IsPointInExpertArea(spawnPoint.Value, spawnHole, 0.01f) == false) continue;
 
                 rand = RandomRatio(4, 6);
-                if (rand == 1) Instantiate(mobZomBunny, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
-                else  Instantiate(mobZomBear, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                if (rand == 1) Instantiate(mobZomBunny, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
+                else Instantiate(mobZomBear, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
             }
             else // 바닥에서 몬스터 생성
             {
-                spawnPoint = GenRandomPoint(spawnFloor, true);
+                if ((spawnPoint = GenRandomPoint(spawnFloor, true)) == null)
+                    continue;
 
                 rand = RandomRatio(2, 6, 8);
-                if (rand == 1) Instantiate(mobHellephant, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
-                else if (rand == 2) Instantiate(mobZomBear, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                if (rand == 1) Instantiate(mobHellephant, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
+                else if (rand == 2) Instantiate(mobZomBear, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
                 else
                 {
-                    Instantiate(mobZomBunny, spawnPoint, Quaternion.identity).transform.SetParent(this.transform);
+                    Instantiate(mobZomBunny, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
                 }
             }
             GameManager.Instance.MonsterCount++;
-            yield return spawnTime;
+
         }
     }
 
@@ -106,43 +110,49 @@ public class MonsterSpawn : MonoBehaviour
 
     /// <summary> 몬스터를 스폰할 지점을 생성합니다. </summary>
     /// <returns> 스폰가능한 영역의 좌표를 리턴합니다. </returns>
-    private Vector3 GenRandomPoint(BoxCollider spawnArea, bool considerCamera)
+    private Vector3? GenRandomPoint(BoxCollider spawnArea, bool considerCamera)
     {
         Vector3 spawnPoint;
+        int retryRate = 0;
 
+        // 스폰가능한 영역을 생성할 때 까지 반복합니다.
         do
         {
+            if (retryRate > 10) return null;
+            else retryRate++;
+            Debug.Log(retryRate);
+
             // 로컬 공간에서 랜덤한 점을 생성합니다.
-            float x = UnityEngine.Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2);
-            float z = UnityEngine.Random.Range(-spawnArea.size.z / 2, spawnArea.size.z / 2);
+            float x = UnityEngine.Random.Range(-spawnArea.size.x / 2.22f, spawnArea.size.x / 2.22f);
+            float z = UnityEngine.Random.Range(-spawnArea.size.z / 2.22f, spawnArea.size.z / 2.22f);
             Vector3 localPoint = new Vector3(x, 0, z);
 
             // 로컬 공간에서의 점을 월드 공간으로 변환합니다.
             spawnPoint = spawnArea.transform.TransformPoint(localPoint);
         }
-        while (IsPointInExpertArea(spawnPoint, spawnArea) && IsPointInCameraView(spawnPoint, considerCamera));
-
+        while (IsPointInExpertArea(spawnPoint, spawnArea) == false // 스폰 불가한 경우
+               || IsPointInCameraView(spawnPoint, considerCamera) == true); // 카메라에 보이는 경우
         return spawnPoint;
     }
 
     /// <summary> 해당 위치에 스폰 가능한지 장애물 여부를 체크합니다. </summary>
     /// <returns> true = 스폰 가능한 영역입니다. false = 스폰 불가능한 영역입니다. </returns>
-    private bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea)
+    private bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea, float radius = 1f)
     {
         // point 위치에서 아래로 레이를 발사합니다.
         Ray ray = new Ray(point + Vector3.up * 100, Vector3.down);
 
-        // 레이가 어떤 콜라이더와 부딛히는지 확인합니다.
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        RaycastHit[] hits = Physics.SphereCastAll(ray, radius, 110f);
+
+        // 레이 범위 내 바닥 콜라이더 이외 어떤것이라도 존재하면, 스폰가능 영역이 아닙니다.
+        foreach (RaycastHit hit in hits)
         {
-            // 레이가 부딛힌 콜라이더가 spawnArea와 같다면 true를 반환합니다.
-            if (hit.collider == spawnArea)
+            if (hit.collider != spawnArea)
             {
-                return true;
+                return false;   // 스폰불가
             }
         }
-
-        return false; // 그 외의 경우에는 false를 반환합니다.
+        return true; // 범위 내 오직 바닥 콜라이더만 존재했으므로 스폰가능
     }
 
     /// <summary> 해당 위치가 카메라에 보여지는 여부를 체크합니다. </summary>

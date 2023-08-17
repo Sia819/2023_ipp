@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.IsAlive == false) return;
-         
 
         /////////////// Player movement ///////////////
 
@@ -67,6 +66,4 @@ public class PlayerMovement : MonoBehaviour
         Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // Y축 보정값 
         rb.MovePosition(transform.position + (destination * speed * Time.fixedDeltaTime));
     }
-
-
 }
