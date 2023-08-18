@@ -19,12 +19,15 @@ public class HpChangedEventArgs : EventArgs
 {
     public float CurrentHp { get; }
     public float MaxHp { get; }
+    public float Change { get; }
     public bool Increased { get; }
+    
 
-    public HpChangedEventArgs(float currentHp, float maxHp, bool increased = false)
+    public HpChangedEventArgs(float currentHp, float maxHp, float change, bool increased = false)
     {
         CurrentHp = currentHp;
         MaxHp = maxHp;
+        Change = change;
         Increased = increased;
     }
 }
@@ -94,6 +97,7 @@ public abstract class Entity : MonoBehaviour
             if (value < 0 && this.currentHp == 0) return;
 
             bool increased = (currentHp < value);
+            float change = value - this.currentHp;
 
             if (value > 0)
                 this.currentHp = value;
@@ -103,7 +107,7 @@ public abstract class Entity : MonoBehaviour
                 OnDeath?.Invoke(this, EventArgs.Empty);
             }
             
-            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp, increased)); 
+            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp, change, increased)); 
         }
     }
 

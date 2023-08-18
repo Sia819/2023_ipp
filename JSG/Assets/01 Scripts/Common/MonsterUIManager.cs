@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MonsterUIManager : MonoBehaviour
 {
     [SerializeField] private Transform monsterUI;
+    [SerializeField] private Canvas monsterUICanvas;
     [SerializeField] private Slider monsterHpBar;
 #nullable enable
     /// <summary> 데미지를 받을 때 나타나는 피해량 Text 입니다. </summary>
@@ -22,6 +23,7 @@ public class MonsterUIManager : MonoBehaviour
     void OnValidate()
     {
         Validate.NullCheck(this, nameof(monsterUI));
+        Validate.NullCheck(this, nameof(monsterUICanvas));
         Validate.NullCheck(this, nameof(monsterHpBar));
     }
     #endregion
@@ -86,7 +88,11 @@ public class MonsterUIManager : MonoBehaviour
 
     void DisplayHertPoint(object sender, HpChangedEventArgs args)
     {
-        damagePoint.gameObject.SetActive(true);
+        var damagePointObj = Instantiate(damagePoint);
+        damagePointObj.transform.SetParent(monsterUICanvas.transform, false);
+        damagePointObj.transform.SetPositionAndRotation(monsterUICanvas.transform.position, Quaternion.Euler(0, 0, 0));
+        var damagePointComponent = damagePointObj.GetComponent<DamagePoint>();
+        damagePointComponent.Point = (int)args.Change;
     }
 
     IEnumerator HideHpBarAfterDelay()

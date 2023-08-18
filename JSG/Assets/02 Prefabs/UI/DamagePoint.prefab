@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 596616059015702188}
   - component: {fileID: 9162454785651288950}
   - component: {fileID: 7095387543329761728}
+  - component: {fileID: 6997715224663775952}
   m_Layer: 5
   m_Name: DamagePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7054403146496293805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -145,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 7237063412478338983}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b4b27dc91044aa49b17dbaf510db0ce, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -156,3 +157,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6997715224663775952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237063412478338983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc358babaa2acaa4884a68f82e5593c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
