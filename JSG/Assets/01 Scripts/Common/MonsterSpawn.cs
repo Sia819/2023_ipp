@@ -16,6 +16,18 @@ public class MonsterSpawn : MonoBehaviour
 
     private WaitForSeconds spawnTime;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(spawnFloor));
+        Validate.NullCheck(this, nameof(spawnHole));
+        Validate.NullCheck(this, nameof(player));
+        Validate.NullCheck(this, nameof(mobZomBear));
+        Validate.NullCheck(this, nameof(mobZomBunny));
+        Validate.NullCheck(this, nameof(mobHellephant));
+    }
+    #endregion
+
     void Start()
     {
         spawnTime = new WaitForSeconds(spawnRate);
@@ -45,10 +57,7 @@ public class MonsterSpawn : MonoBehaviour
             yield return spawnTime;
 
             if (spawnMax <= GameManager.Instance.MonsterCount)
-            {
-                yield return spawnTime;
                 continue;
-            }
 
             Vector3? spawnPoint;
             int rand = RandomRatio(3, 7);
@@ -87,15 +96,18 @@ public class MonsterSpawn : MonoBehaviour
     /// <returns> 예를들어 RandomRatio(3, 4, 1) 을 입력했다면, 3의 확률로 1, 4의 확률로 2, 1의 확률로 3이 반환됩니다. </returns>
     public int RandomRatio(params int[] ratios)
     {
+        // 전체 확률을 구합니다.
         int totalRate = 0;
         foreach (int ratio in ratios)
         {
             totalRate += ratio;
         }
 
+        // 랜덤 확률을 적용시킵니다.
         int randomValue = UnityEngine.Random.Range(0, totalRate);
-        int accumulatedRate = 0;
 
+        // 랜덤값이 몇번째 비율인지 누적계산 후 반환합니다.
+        int accumulatedRate = 0;
         for (int i = 0; i < ratios.Length; i++)
         {
             accumulatedRate += ratios[i];
@@ -120,7 +132,6 @@ public class MonsterSpawn : MonoBehaviour
         {
             if (retryRate > 10) return null;
             else retryRate++;
-            Debug.Log(retryRate);
 
             // 로컬 공간에서 랜덤한 점을 생성합니다.
             float x = UnityEngine.Random.Range(-spawnArea.size.x / 2.22f, spawnArea.size.x / 2.22f);

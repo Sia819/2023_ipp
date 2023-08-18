@@ -1211,6 +1211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba533fede086ed43af69860399692d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePoint: {fileID: 0}
 --- !u!114 &1686997589403785630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,22 +1547,6 @@ PrefabInstance:
     - target: {fileID: 3978346105006785094, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.b
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 5897267966756412815, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7869498915436521280, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
       propertyPath: m_Pivot.x

@@ -18,6 +18,14 @@ public class Monster : Entity
     private NavMeshAgent agent;
     private readonly WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(boundCollider));
+        Validate.NullCheck(this, nameof(attackCollider));
+    }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();

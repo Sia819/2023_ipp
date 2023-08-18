@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +8,29 @@ public class MonsterUIManager : MonoBehaviour
 {
     [SerializeField] private Transform monsterUI;
     [SerializeField] private Slider monsterHpBar;
+#nullable enable
+    /// <summary> 데미지를 받을 때 나타나는 피해량 Text 입니다. </summary>
+    [SerializeField] private TMP_Text? damagePoint;
+#nullable disable
     [SerializeField] private Vector3 HPBAR_POS_OFFSET = new(0f, -5f, 0f);
 
     private Monster monster;
     private Camera mainCamera;
     private Coroutine hideHpBarCoroutine;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(monsterUI));
+        Validate.NullCheck(this, nameof(monsterHpBar));
+    }
+    #endregion
+
     void Awake()
     {
         monster = GetComponent<Monster>();
         monster.OnHpChanged += HpBarUpdate;
+        if (damagePoint != null) monster.OnHpChanged += DisplayHertPoint;
     }
 
     void Start()
@@ -68,6 +82,11 @@ public class MonsterUIManager : MonoBehaviour
 
         // 새로운 숨기기 코루틴을 시작합니다.
         hideHpBarCoroutine = StartCoroutine(HideHpBarAfterDelay());
+    }
+
+    void DisplayHertPoint(object sender, HpChangedEventArgs args)
+    {
+        damagePoint.gameObject.SetActive(true);
     }
 
     IEnumerator HideHpBarAfterDelay()

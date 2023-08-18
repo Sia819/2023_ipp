@@ -103,7 +103,7 @@ public abstract class Entity : MonoBehaviour
                 OnDeath?.Invoke(this, EventArgs.Empty);
             }
             
-            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp, increased));
+            OnHpChanged?.Invoke(this, new HpChangedEventArgs(this.currentHp, MaxHp, increased)); 
         }
     }
 
@@ -127,7 +127,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     /// <summary> 이 Entity가 공격을 했으며, <see cref="OnAttacked"/> 이벤트가 호출됩니다. </summary>
-    public void ExcuteAttack(Entity targetEntity, float damage, Vector3? hitPoint)
+    public void ExecuteAttack(Entity targetEntity, float damage, Vector3? hitPoint)
     {
         OnAttacked?.Invoke(this, new AttackEventArgs(targetEntity, damage, hitPoint));
     }
