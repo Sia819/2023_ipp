@@ -74,7 +74,7 @@ public class MonsterUIManager : MonoBehaviour
         // 체력이 0이라면 체력바를 즉시 숨깁니다.
         if (args.CurrentHp <= 0)
         {
-            monsterUI.gameObject.SetActive(false);
+            monsterHpBar.gameObject.SetActive(false);
             return;
         }
 
@@ -86,9 +86,12 @@ public class MonsterUIManager : MonoBehaviour
         hideHpBarCoroutine = StartCoroutine(HideHpBarAfterDelay());
     }
 
+    /// <summary> 데미지 숫자를 표시합니다. </summary>
     void DisplayHertPoint(object sender, HpChangedEventArgs args)
     {
         var damagePointObj = Instantiate(damagePoint);
+        //if (damagePointObj.transform is RectTransform trans)
+        //    trans.
         damagePointObj.transform.SetParent(monsterUICanvas.transform, false);
         damagePointObj.transform.SetPositionAndRotation(monsterUICanvas.transform.position, Quaternion.Euler(0, 0, 0));
         var damagePointComponent = damagePointObj.GetComponent<DamagePoint>();
