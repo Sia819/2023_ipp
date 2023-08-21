@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5c3d4a462b77549a63cd3509d06df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHp>k__BackingField: 160
+  <MaxHp>k__BackingField: 120
   <Damage>k__BackingField: 30
   ScorePoint: 200
   boundCollider: {fileID: 7822907141969764982}

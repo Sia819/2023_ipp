@@ -65,8 +65,6 @@ public class MonsterSpawn : MonoBehaviour
             if (rand == 1) // 쥐구멍에서 몬스터 스폰
             {
                 spawnPoint = spawnHole.transform.position;
-                if (IsPointInExpertArea(spawnPoint.Value, spawnHole, 0.01f) == false) continue;
-
                 rand = RandomRatio(4, 6);
                 if (rand == 1) Instantiate(mobZomBunny, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
                 else Instantiate(mobZomBear, spawnPoint.Value, Quaternion.identity).transform.SetParent(this.transform);
@@ -148,6 +146,9 @@ public class MonsterSpawn : MonoBehaviour
 
     /// <summary> 해당 위치에 스폰 가능한지 장애물 여부를 체크합니다. </summary>
     /// <returns> true = 스폰 가능한 영역입니다. false = 스폰 불가능한 영역입니다. </returns>
+    /// <param name="point">스폰가능 영역을 확인 할 위치입니다.</param>
+    /// <param name="spawnArea">스폰 할 콜라이더 입니다.</param>
+    /// <param name="radius">스폰 허용 너비 입니다.</param>
     private bool IsPointInExpertArea(Vector3 point, BoxCollider spawnArea, float radius = 1f)
     {
         // point 위치에서 아래로 레이를 발사합니다.
