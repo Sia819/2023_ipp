@@ -38,6 +38,11 @@ public class PlayerAttack : MonoBehaviour
         player.OnAttacked += GiveDamage;
     }
 
+    private void OnDestroy()
+    {
+        player.OnAttacked -= GiveDamage;
+    }
+
     private void LateUpdate()
     {
         Entity attackTarget = null;

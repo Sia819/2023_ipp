@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         // 움직임 속성 값 업데이트
         if (moveHorizontal == 0 && moveVertical == 0)
             player.IsMoving = false;
-        else if (!(moveHorizontal == 0 && moveVertical == 0))
+        else
         {
             player.IsMoving = true;
             // 첫 움직임이 시작되었으므로 스테이지를 시작합니다.

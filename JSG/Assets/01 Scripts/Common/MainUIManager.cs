@@ -36,13 +36,13 @@ public class MainUIManager : Singleton<MainUIManager>
         Validate.NullCheck(this, nameof(restartButton));
         Validate.NullCheck(this, nameof(startGuide));
 
-        if (mainUICanvas == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(mainUICanvas)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (playerHpBar == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpBar)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (playerHpPoint == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpPoint)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (gameScore == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(gameScore)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (uiAnimator == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(uiAnimator)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (restartButton == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(restartButton)}요소는 필수이므로 비어있을 수 없습니다.", this);
-        if (startGuide == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(startGuide)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (mainUICanvas == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(mainUICanvas)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (playerHpBar == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpBar)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (playerHpPoint == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpPoint)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (gameScore == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(gameScore)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (uiAnimator == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(uiAnimator)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (restartButton == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(restartButton)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        // if (startGuide == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(startGuide)}요소는 필수이므로 비어있을 수 없습니다.", this);
     }
     #endregion
 
@@ -76,7 +76,8 @@ public class MainUIManager : Singleton<MainUIManager>
 
     private void Update()
     {
-        if (smoothlyChangeScore && Math.Abs(currentScore - displayScore) != 0)
+        ///////////////// 부드러운 점수 변경 /////////////////
+        if (smoothlyChangeScore && Math.Abs(currentScore - displayScore) != 0) 
         {
             // deltaTime을 고려하여 점수 증가
             int direction = currentScore > displayScore ? 1 : -1;
@@ -91,6 +92,7 @@ public class MainUIManager : Singleton<MainUIManager>
         gameScore.text = $"SCORE: {displayScore}";
     }
 
+    /// <summary> 게임 점수가 변경되었을 때 </summary>
     private void GameScoreChange(object sender, GameScoreChangedEventArgs args)
     {
         currentScore = args.GameScore;
@@ -98,10 +100,11 @@ public class MainUIManager : Singleton<MainUIManager>
 
         // 점수의 크기에 따라 부드럽게 상승하는 시간 계산
         int scoreDifference = Math.Abs(currentScore - displayScore);
-        if (scoreDifference > 200) transitionSpeed = Math.Abs(currentScore - displayScore);
+        if (scoreDifference > 200) transitionSpeed = scoreDifference;
         else transitionSpeed = 300;
     }
 
+    /// <summary> 체력이 변경되었을 때 </summary>
     private void HpUpdate(object sender, HpChangedEventArgs args)
     {
         playerHpBar.value = args.CurrentHp;
@@ -109,21 +112,24 @@ public class MainUIManager : Singleton<MainUIManager>
         uiAnimator.SetTrigger("Damaged");
     }
 
+    /// <summary> 캐릭터가 사망했을 때 </summary>
     private void DeathUI(object sender, EventArgs args)
     {
         uiAnimator.SetTrigger("Death");
     }
 
+    /// <summary> 스테이지가 시작되었을 때 </summary>
+    private void StageStarted(object sender, EventArgs args)
+    {
+        GameManager.Instance.GameScoreSmoothlyChange = true;
+        startGuide.SetActive(false);
+    }
+
+    /// <summary> 게임이 재시작 되었을 때 </summary>
     private void GameRestarted()
     {
         uiAnimator.SetTrigger("Restart");
         GameManager.Instance.GameRestart();
         startGuide.SetActive(true);
-    }
-
-    private void StageStarted(object sender, EventArgs args)
-    {
-        GameManager.Instance.GameScoreSmoothlyChange = true;
-        startGuide.SetActive(false);
     }
 }
