@@ -13,7 +13,7 @@ public class EntitySoundplayer : MonoBehaviour
     [SerializeField] private AudioClip? hertClip;
     [SerializeField] private AudioClip? deathClip;
     [SerializeField] private AudioClip? attackClip;
-#nullable restore
+#nullable disable
 
     private Entity entity;
     private AudioSource entitySound;

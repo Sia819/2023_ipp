@@ -1008,7 +1008,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterUI: {fileID: 606450145297813764}
+  monsterUICanvas: {fileID: 6426011455523839643}
   monsterHpBar: {fileID: 1322477442419422411}
+  damagePoint: {fileID: 9162454785651288950, guid: 5144b30c9cc59c246b6f4f9295ceca31, type: 3}
   HPBAR_POS_OFFSET: {x: 0, y: -0.3, z: 0}
 --- !u!1 &5563388873546722797
 GameObject:
@@ -1752,6 +1754,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2388919188645073984, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
+    - {fileID: 5654806340239550278, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
@@ -1769,5 +1772,10 @@ MonoBehaviour:
 --- !u!224 &4714183252178887480 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7869498915436521280, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
+  m_PrefabInstance: {fileID: 3195927502037812344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &6426011455523839643 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 8464498448887667427, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
   m_PrefabInstance: {fileID: 3195927502037812344}
   m_PrefabAsset: {fileID: 0}

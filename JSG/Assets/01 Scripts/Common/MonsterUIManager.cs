@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,17 +7,32 @@ using UnityEngine.UI;
 public class MonsterUIManager : MonoBehaviour
 {
     [SerializeField] private Transform monsterUI;
+    [SerializeField] private Canvas monsterUICanvas;
     [SerializeField] private Slider monsterHpBar;
+#nullable enable
+    /// <summary> 데미지를 받을 때 나타나는 피해량 Text 입니다. </summary>
+    [SerializeField] private TMP_Text? damagePoint;
+#nullable disable
     [SerializeField] private Vector3 HPBAR_POS_OFFSET = new(0f, -5f, 0f);
 
     private Monster monster;
     private Camera mainCamera;
     private Coroutine hideHpBarCoroutine;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(monsterUI));
+        Validate.NullCheck(this, nameof(monsterUICanvas));
+        Validate.NullCheck(this, nameof(monsterHpBar));
+    }
+    #endregion
+
     void Awake()
     {
         monster = GetComponent<Monster>();
         monster.OnHpChanged += HpBarUpdate;
+        if (damagePoint != null) monster.OnHpChanged += DisplayHertPoint;
     }
 
     void Start()
@@ -58,7 +74,7 @@ public class MonsterUIManager : MonoBehaviour
         // 체력이 0이라면 체력바를 즉시 숨깁니다.
         if (args.CurrentHp <= 0)
         {
-            monsterUI.gameObject.SetActive(false);
+            monsterHpBar.gameObject.SetActive(false);
             return;
         }
 
@@ -68,6 +84,18 @@ public class MonsterUIManager : MonoBehaviour
 
         // 새로운 숨기기 코루틴을 시작합니다.
         hideHpBarCoroutine = StartCoroutine(HideHpBarAfterDelay());
+    }
+
+    /// <summary> 데미지 숫자를 표시합니다. </summary>
+    void DisplayHertPoint(object sender, HpChangedEventArgs args)
+    {
+        var damagePointObj = Instantiate(damagePoint);
+        //if (damagePointObj.transform is RectTransform trans)
+        //    trans.
+        damagePointObj.transform.SetParent(monsterUICanvas.transform, false);
+        damagePointObj.transform.SetPositionAndRotation(monsterUICanvas.transform.position, Quaternion.Euler(0, 0, 0));
+        var damagePointComponent = damagePointObj.GetComponent<DamagePoint>();
+        damagePointComponent.Point = (int)args.Change;
     }
 
     IEnumerator HideHpBarAfterDelay()

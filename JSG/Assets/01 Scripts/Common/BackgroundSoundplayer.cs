@@ -13,6 +13,13 @@ public class BackgroundSoundplayer : MonoBehaviour
 
     private AudioSource backgroundSound;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        if (backgroundClip == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(backgroundClip)}요소는 필수이므로 비어있을 수 없습니다.", this);
+    }
+    #endregion
+
     void Awake()
     {
         // 게임 (시작&종료 시) 배경음악 (재생&정지)

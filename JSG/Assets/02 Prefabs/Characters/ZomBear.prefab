@@ -1264,7 +1264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterUI: {fileID: 1546177356566644806}
+  monsterUICanvas: {fileID: 1968532487345400377}
   monsterHpBar: {fileID: 5775308775082639465}
+  damagePoint: {fileID: 9162454785651288950, guid: 5144b30c9cc59c246b6f4f9295ceca31, type: 3}
   HPBAR_POS_OFFSET: {x: 0, y: -0.3, z: 0}
 --- !u!1 &7245864667150086846
 GameObject:
@@ -1547,22 +1549,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.b
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4359386177115038611, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 5897267966756412815, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7869498915436521280, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1648,13 +1634,19 @@ PrefabInstance:
       value: MonsterUICanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5654806340239550278, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
 --- !u!224 &220749162850342810 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7869498915436521280, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
+  m_PrefabInstance: {fileID: 7937121141372661978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1968532487345400377 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 8464498448887667427, guid: 189becda13f81da47ba0ee82a6dd1af9, type: 3}
   m_PrefabInstance: {fileID: 7937121141372661978}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5775308775082639465 stripped

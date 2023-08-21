@@ -12,6 +12,13 @@ public class MonsterAttack : MonoBehaviour
     private readonly WaitForSeconds attackTime = new WaitForSeconds(1f);
     private bool continuousAttack;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(AttackCollider));
+    }
+    #endregion
+
     void Awake()
     {
         monster = GetComponent<Monster>();

@@ -15,9 +15,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             // T가 초기화 되지 않았거나, 프로그램이 종료 중이지 않을 때 싱글톤 오브젝트를 생성합니다.
             if (_instance == null && Time.timeScale != 0)
             {
-                GameObject singleton = new GameObject();
-                _instance = singleton.AddComponent<T>();
-                singleton.name = typeof(T).ToString() + " (Singleton)";
+                Debug.LogWarning($"{typeof(T).ToString()}가 존재하지 않습니다!");
             }
 
             return _instance;
@@ -34,7 +32,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else if (_instance != this)
         {
             Destroy(this);
-            Debug.LogWarning($"{typeof(T).Name}가 하나 이상 존재합니다!");
+            Debug.LogWarning($"{typeof(T).Name}가 하나 이상 존재합니다!", this);
         }
     }
 }

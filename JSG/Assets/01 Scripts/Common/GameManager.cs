@@ -102,6 +102,13 @@ public class GameManager : Singleton<GameManager>
     private bool isPlaying;
     private bool isStageStarted;
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(Player));
+    }
+    #endregion
+
     void Start()
     {
         IsPlaying = true;

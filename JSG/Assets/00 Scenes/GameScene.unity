@@ -4203,38 +4203,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 806501442687091974, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1535167476455549430, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: attackLate
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467784524159951198, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488450925047324739, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5177736411662715221, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Lightmapping
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6029993955607007510, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6029993955607007510, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Center.z
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6531205434513662255, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: m_Lightmapping
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6762744929058676194, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4278,10 +4246,6 @@ PrefabInstance:
     - target: {fileID: 6904573568695049667, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777794706844955557, guid: 8c06c333144c86e49aa23c4ba9e0fd2c, type: 3}
-      propertyPath: <MaxHp>k__BackingField
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

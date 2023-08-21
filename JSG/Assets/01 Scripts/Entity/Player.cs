@@ -8,6 +8,14 @@ public sealed class Player : Entity
     [field: SerializeField] public Transform GunFlareTransform { get; private set; }
     [field: SerializeField] public GameObject GunLight { get; private set; }
 
+    #region Inspector Warning
+    private void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(GunFlareTransform));
+        Validate.NullCheck(this, nameof(GunLight));
+    }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();

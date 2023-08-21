@@ -21,6 +21,16 @@ public class PlayerAttack : MonoBehaviour
     
     private float attackCooldown = 0.0f;    // 시간 저장변수
 
+    #region Inspector Warning
+    private void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(gunStart));
+        Validate.NullCheck(this, nameof(gunEnd));
+        Validate.NullCheck(this, nameof(gunParticle));
+        Validate.NullCheck(this, nameof(hitParticle));
+    }
+    #endregion
+
     void Awake()
     {
         player = GetComponent<Player>();
@@ -69,7 +79,7 @@ public class PlayerAttack : MonoBehaviour
             // 플레이어가 생존 시 공격 후 쿨다운, 생존하지 않으면 쿨다운 적용
             if (player.IsAlive == true)
             {
-                player.ExcuteAttack(attackTarget, player.Damage, hitPoint); // 공격
+                player.ExecuteAttack(attackTarget, player.Damage, hitPoint); // 공격
 
                 // 첫 공격이 시작되었으므로 스테이지를 시작합니다.
                 if (GameManager.Instance.IsStageStarted == false)

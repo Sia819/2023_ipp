@@ -25,6 +25,27 @@ public class MainUIManager : Singleton<MainUIManager>
     private int currentScore;
     private float transitionSpeed = 300f; // 0.5초에 점수을 올리기 위한 속도
 
+    #region Inspector Warning
+    void OnValidate()
+    {
+        Validate.NullCheck(this, nameof(mainUICanvas));
+        Validate.NullCheck(this, nameof(playerHpBar));
+        Validate.NullCheck(this, nameof(playerHpPoint));
+        Validate.NullCheck(this, nameof(gameScore));
+        Validate.NullCheck(this, nameof(uiAnimator));
+        Validate.NullCheck(this, nameof(restartButton));
+        Validate.NullCheck(this, nameof(startGuide));
+
+        if (mainUICanvas == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(mainUICanvas)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (playerHpBar == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpBar)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (playerHpPoint == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(playerHpPoint)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (gameScore == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(gameScore)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (uiAnimator == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(uiAnimator)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (restartButton == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(restartButton)}요소는 필수이므로 비어있을 수 없습니다.", this);
+        if (startGuide == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(startGuide)}요소는 필수이므로 비어있을 수 없습니다.", this);
+    }
+    #endregion
+
     void Start()
     {
         // 플레이어 체력 초기설정
