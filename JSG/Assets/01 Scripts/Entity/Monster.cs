@@ -19,7 +19,7 @@ public class Monster : Entity
     private readonly WaitForSeconds deathWaitTime = new WaitForSeconds(0.7f);
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(boundCollider));
         Validate.NullCheck(this, nameof(attackCollider));

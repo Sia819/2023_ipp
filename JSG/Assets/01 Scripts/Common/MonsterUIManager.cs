@@ -20,7 +20,7 @@ public class MonsterUIManager : MonoBehaviour
     private Coroutine hideHpBarCoroutine;
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(monsterUI));
         Validate.NullCheck(this, nameof(monsterUICanvas));
@@ -28,14 +28,14 @@ public class MonsterUIManager : MonoBehaviour
     }
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         monster = GetComponent<Monster>();
         monster.OnHpChanged += HpBarUpdate;
         if (damagePoint != null) monster.OnHpChanged += DisplayHertPoint;
     }
 
-    void Start()
+    private void Start()
     {
         mainCamera = Camera.main;
 
@@ -46,8 +46,14 @@ public class MonsterUIManager : MonoBehaviour
         monsterUI.gameObject.SetActive(false);
     }
 
-    // 매 업데이트마다 몬스터의 체력바의 위치를 카메라를 향하도록 보정합니다.
-    void LateUpdate()
+    private void OnDestroy()
+    {
+        monster.OnHpChanged -= HpBarUpdate;
+        monster.OnHpChanged -= DisplayHertPoint;
+    }
+
+    /// <summary> 매 업데이트마다 몬스터의 체력바의 위치를 카메라를 향하도록 보정합니다. </summary>
+    private void LateUpdate()
     {
         // 위치를 기반으로 체력바의 초기 위치를 설정합니다.
         Vector3 initialPosition = this.transform.localPosition + HPBAR_POS_OFFSET;
@@ -64,8 +70,8 @@ public class MonsterUIManager : MonoBehaviour
         monsterUI.transform.Rotate(0, 180, 0);
     }
 
-
-    void HpBarUpdate(object sender, HpChangedEventArgs args)
+    /// <summary> 체력바를 업데이트 합니다. </summary>
+    private void HpBarUpdate(object sender, HpChangedEventArgs args)
     {
         // 체력바를 활성화합니다.
         monsterUI.gameObject.SetActive(true);
@@ -87,7 +93,7 @@ public class MonsterUIManager : MonoBehaviour
     }
 
     /// <summary> 데미지 숫자를 표시합니다. </summary>
-    void DisplayHertPoint(object sender, HpChangedEventArgs args)
+    private void DisplayHertPoint(object sender, HpChangedEventArgs args)
     {
         var damagePointObj = Instantiate(damagePoint);
         //if (damagePointObj.transform is RectTransform trans)
@@ -98,7 +104,7 @@ public class MonsterUIManager : MonoBehaviour
         damagePointComponent.Point = (int)args.Change;
     }
 
-    IEnumerator HideHpBarAfterDelay()
+    private IEnumerator HideHpBarAfterDelay()
     {
         yield return new WaitForSeconds(5f);
         monsterUI.gameObject.SetActive(false);

@@ -18,7 +18,6 @@ public class PlayerAttack : MonoBehaviour
 
     private Player player;
     private LineRenderer lineRenderer;
-    
     private float attackCooldown = 0.0f;    // 시간 저장변수
 
     #region Inspector Warning
@@ -31,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     }
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         player = GetComponent<Player>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -39,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
         player.OnAttacked += GiveDamage;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         Entity attackTarget = null;
         Vector3? hitPoint = null;
@@ -70,7 +69,8 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        ///////////////// 공격, 쿨타임마다 공격가능 ////////////////
+        ///////////////// 공격 ////////////////
+        //쿨타임마다만 공격가능
         if (attackCooldown < 0.0f)
         {
             // 왼쪽 마우스가 눌려진 상태에서만 공격할 수 있습니다.

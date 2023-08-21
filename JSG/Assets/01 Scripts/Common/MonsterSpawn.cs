@@ -17,7 +17,7 @@ public class MonsterSpawn : MonoBehaviour
     private WaitForSeconds spawnTime;
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(spawnFloor));
         Validate.NullCheck(this, nameof(spawnHole));
@@ -28,11 +28,17 @@ public class MonsterSpawn : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    private void Start()
     {
         spawnTime = new WaitForSeconds(spawnRate);
         GameManager.Instance.OnGameStarted += ResetMonster;
         GameManager.Instance.OnStageStarted += SpawnMonster;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStarted -= ResetMonster;
+        GameManager.Instance.OnStageStarted -= SpawnMonster;
     }
 
     // 게임이 초기화 되었을 때, 모든 몬스터를 삭제합니다.

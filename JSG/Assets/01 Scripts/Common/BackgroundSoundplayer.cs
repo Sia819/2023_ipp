@@ -14,13 +14,13 @@ public class BackgroundSoundplayer : MonoBehaviour
     private AudioSource backgroundSound;
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         if (backgroundClip == null) Debug.LogWarning($"{GetType().Name}컴포넌트의 {nameof(backgroundClip)}요소는 필수이므로 비어있을 수 없습니다.", this);
     }
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         // 게임 (시작&종료 시) 배경음악 (재생&정지)
         GameManager.Instance.OnGameStarted += GameStart;
@@ -30,6 +30,12 @@ public class BackgroundSoundplayer : MonoBehaviour
         backgroundSound.playOnAwake = false;
         backgroundSound.loop = true;
         backgroundSound.clip = backgroundClip;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStarted -= GameStart;
+        GameManager.Instance.Player.OnDeath -= GameOver;
     }
 
     /// <summary> 게임이 시작될 때 배경음악을 재생합니다. </summary>

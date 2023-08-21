@@ -13,18 +13,18 @@ public class MonsterAttack : MonoBehaviour
     private bool continuousAttack;
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(AttackCollider));
     }
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         monster = GetComponent<Monster>();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (monster.IsAlive && other.CompareTag("Player"))
         {
@@ -41,7 +41,8 @@ public class MonsterAttack : MonoBehaviour
         }
     }
 
-    IEnumerator Attack()
+    /// <summary> 몬스터의 공격을 구현합니다. </summary>
+    private IEnumerator Attack()
     {
         do
         {

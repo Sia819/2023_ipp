@@ -19,7 +19,7 @@ public class EntitySoundplayer : MonoBehaviour
     private AudioSource entitySound;
     private AudioSource effectSound;
 
-    void Awake()
+    private void Awake()
     {
         entity = GetComponent<Entity>();
 
@@ -50,6 +50,13 @@ public class EntitySoundplayer : MonoBehaviour
             effectSound.clip = (attackClip != null ? attackClip : entitySound.clip);
             entity.OnAttacked += OnAttackSoundPlay;
         }
+    }
+
+    private void OnDestroy()
+    {
+        entity.OnHpChanged -= OnHertSoundPlay;
+        entity.OnDeath -= OnDeathSoundPlay;
+        entity.OnAttacked -= OnAttackSoundPlay;
     }
 
     /// <summary> Entity가 다쳤을 때 사운드 재생 </summary>

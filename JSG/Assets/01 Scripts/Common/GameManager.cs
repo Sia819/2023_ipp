@@ -103,13 +103,13 @@ public class GameManager : Singleton<GameManager>
     private bool isStageStarted;
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(Player));
     }
     #endregion
 
-    void Start()
+    private void Start()
     {
         IsPlaying = true;
     }
@@ -134,7 +134,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
-    /// 호출 시 스테이지가 종료됩니다.
+    /// 호출 시 게임이 종료됩니다.
     /// </summary>
     public void GameSet()
     {

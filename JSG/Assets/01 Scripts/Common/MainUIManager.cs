@@ -26,7 +26,7 @@ public class MainUIManager : Singleton<MainUIManager>
     private float transitionSpeed = 300f; // 0.5초에 점수을 올리기 위한 속도
 
     #region Inspector Warning
-    void OnValidate()
+    private void OnValidate()
     {
         Validate.NullCheck(this, nameof(mainUICanvas));
         Validate.NullCheck(this, nameof(playerHpBar));
@@ -46,7 +46,7 @@ public class MainUIManager : Singleton<MainUIManager>
     }
     #endregion
 
-    void Start()
+    private void Start()
     {
         // 플레이어 체력 초기설정
         Player player = GameManager.Instance.Player;

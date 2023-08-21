@@ -15,7 +15,7 @@ public class EntityAnimationController : MonoBehaviour
     protected Animator animator;
     protected Entity entity;
 
-    void Awake()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         entity = GetComponent<Entity>();
@@ -59,7 +59,7 @@ public class EntityAnimationController : MonoBehaviour
     /// <summary> 게임이 재시작되었을 때, Idle 상태로 변경합니다. </summary>
     private void GameRestarted(object sender, EventArgs args)
     {
-        animator?.SetBool("Death", false);
-        animator?.SetTrigger("StopTrg");
+        animator.SetBool("Death", false);
+        animator.SetTrigger("StopTrg");
     }
 }

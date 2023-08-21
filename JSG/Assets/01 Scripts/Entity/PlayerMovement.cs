@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어의 움직임을 제어할 수 있습니다.
+/// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Player))]
@@ -12,15 +15,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Player player;
-    private float speedCorrectionY = 1.2f; // Player movement 세로축 보정 값
+    private readonly float speedCorrectionY = 1.2f; // Player movement 세로축 보정 값
 
-    void Start()
+    private void Start()
     {
         player = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    /// <summary> 매 프레임마다 캐릭터가 마우스의 방향을 바라보도록 합니다. </summary>
+    private void Update()
     {
         if (player.IsAlive == false) return;
 
@@ -42,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary> 방향키에 따른 방향으로 캐릭터를 물리적으로 움직이도록 합니다. </summary>
     private void FixedUpdate()
     {
         if (player.IsAlive == false) return;
@@ -64,6 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
         // 물리 움직임 구현
         Vector3 destination = new Vector3(moveHorizontal, 0.0f, moveVertical * speedCorrectionY); // Y축 보정값 
-        rb.MovePosition(transform.position + (destination * speed * Time.fixedDeltaTime));
+        rb.MovePosition(transform.position + (speed * Time.fixedDeltaTime * destination));
     }
 }

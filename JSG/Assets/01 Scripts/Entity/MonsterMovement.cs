@@ -12,7 +12,7 @@ public class MonsterMovement : MonoBehaviour
     private NavMeshAgent navAgent;      // NavMesh Agent 컴포넌트
     private readonly WaitForSeconds pathUpdateRate = new WaitForSeconds(1f);      // 경로 업데이트 빈도 (초 단위)
 
-    void Awake()
+    private void Awake()
     {
         monster = GetComponent<Monster>();
         navAgent = GetComponent<NavMeshAgent>();
@@ -21,6 +21,7 @@ public class MonsterMovement : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    /// <summary> 몬스터의 움직임을 구현합니다. </summary>
     private IEnumerator Move()
     {
         yield return new WaitForEndOfFrame();
